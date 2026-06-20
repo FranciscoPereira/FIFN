@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFN — Federation Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f8f6;
+      --surface: #ffffff;
+      --surface2: #f2f1ed;
+      --border: rgba(0,0,0,0.10);
+      --border-strong: rgba(0,0,0,0.18);
+      --text: #1a1a18;
+      --text2: #5a5a57;
+      --text3: #8a8a86;
+      --purple-bg: #EEEDFE; --purple-border: #534AB7; --purple-text: #3C3489;
+      --teal-bg: #E1F5EE;   --teal-border: #0F6E56;   --teal-text: #085041;
+      --amber-bg: #FAEEDA;  --amber-border: #854F0B;  --amber-text: #633806;
+      --red-bg: #FCEBEB;    --red-border: #A32D2D;    --red-text: #791F1F;
+      --green-bg: #EAF3DE;  --green-border: #3B6D11;  --green-text: #27500A;
+      --blue-bg: #E6F1FB;   --blue-border: #185FA5;   --blue-text: #0C447C;
+      --r: 10px; --r-sm: 6px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #18181a; --surface: #242428; --surface2: #2e2e33;
+        --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.15);
+        --text: #e8e8e4; --text2: #a0a09c; --text3: #686864;
+        --purple-bg: #26215C; --purple-border: #AFA9EC; --purple-text: #CECBF6;
+        --teal-bg: #04342C;   --teal-border: #5DCAA5;   --teal-text: #9FE1CB;
+        --amber-bg: #412402;  --amber-border: #EF9F27;  --amber-text: #FAC775;
+        --red-bg: #501313;    --red-border: #F09595;    --red-text: #F7C1C1;
+        --green-bg: #173404;  --green-border: #97C459;  --green-text: #C0DD97;
+        --blue-bg: #042C53;   --blue-border: #85B7EB;   --blue-text: #B5D4F4;
+      }
+    }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+    .shell { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar { background: var(--surface); border-right: 0.5px solid var(--border-strong); padding: 0; display: flex; flex-direction: column; }
+    .logo { padding: 20px 20px 16px; border-bottom: 0.5px solid var(--border); }
+    .logo-mark { display: flex; align-items: center; gap: 8px; }
+    .logo-icon { width: 28px; height: 28px; background: var(--purple-bg); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .logo-icon i { font-size: 16px; color: var(--purple-text); }
+    .logo-name { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.2px; }
+    .logo-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+    .nav { padding: 12px 10px; flex: 1; }
+    .nav-section { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; padding: 8px 10px 4px; }
+    .nav-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: var(--r-sm); color: var(--text2); cursor: pointer; font-size: 13px; transition: background 0.1s; }
+    .nav-item:hover { background: var(--surface2); }
+    .nav-item.active { background: var(--purple-bg); color: var(--purple-text); font-weight: 500; }
+    .nav-item i { font-size: 16px; }
+    .sidebar-footer { padding: 14px 20px; border-top: 0.5px solid var(--border); }
+    .node-badge { display: flex; align-items: center; gap: 8px; }
+    .node-dot { width: 8px; height: 8px; border-radius: 50%; background: #1D9E75; flex-shrink: 0; }
+    .node-info { font-size: 12px; }
+    .node-id { font-weight: 500; color: var(--text); }
+    .node-status { color: var(--text3); font-size: 11px; }
+
+    /* Main */
+    .main { display: flex; flex-direction: column; overflow: auto; }
+    .topbar { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 0 28px; height: 52px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .topbar-title { font-size: 15px; font-weight: 500; color: var(--text); }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--r-sm); border: 0.5px solid var(--border-strong); background: transparent; color: var(--text2); font-size: 12px; cursor: pointer; font-family: inherit; transition: background 0.1s; }
+    .btn:hover { background: var(--surface2); }
+    .btn-primary { background: var(--purple-bg); border-color: var(--purple-border); color: var(--purple-text); font-weight: 500; }
+    .btn-primary:hover { opacity: 0.88; }
+    .round-badge { display: flex; align-items: center; gap: 6px; padding: 5px 10px; background: var(--teal-bg); border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--teal-text); }
+    .pulse { width: 7px; height: 7px; border-radius: 50%; background: #1D9E75; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    /* Content */
+    .content { padding: 24px 28px; flex: 1; }
+    .section-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+
+    /* Metric cards */
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .metric { background: var(--surface2); border-radius: var(--r-sm); padding: 14px 16px; }
+    .metric-label { font-size: 12px; color: var(--text3); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+    .metric-label i { font-size: 13px; }
+    .metric-value { font-size: 24px; font-weight: 600; color: var(--text); line-height: 1; }
+    .metric-delta { font-size: 11px; margin-top: 4px; }
+    .delta-up { color: var(--teal-text); }
+    .delta-down { color: var(--red-text); }
+
+    /* Two-col layout */
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .row3 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 18px 20px; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .card-title { font-size: 13px; font-weight: 500; color: var(--text); }
+    .card-action { font-size: 11px; color: var(--text3); cursor: pointer; }
+
+    /* Node list */
+    .node-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+    .node-row:last-child { border-bottom: none; }
+    .node-avatar { width: 30px; height: 30px; border-radius: 6px; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--text2); flex-shrink: 0; }
+    .node-name { font-size: 13px; font-weight: 500; color: var(--text); }
+    .node-meta { font-size: 11px; color: var(--text3); }
+    .node-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .status-pill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
+    .pill-green { background: var(--green-bg); color: var(--green-text); }
+    .pill-amber { background: var(--amber-bg); color: var(--amber-text); }
+    .pill-red   { background: var(--red-bg);   color: var(--red-text);   }
+    .pill-blue  { background: var(--blue-bg);  color: var(--blue-text);  }
+
+    /* Progress bar */
+    .prog-wrap { background: var(--surface2); border-radius: 3px; height: 4px; flex: 1; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 3px; background: #534AB7; }
+
+    /* Round timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item { display: flex; gap: 12px; }
+    .tl-line { display: flex; flex-direction: column; align-items: center; }
+    .tl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .tl-connector { width: 1px; background: var(--border); flex: 1; margin: 3px 0; min-height: 20px; }
+    .tl-content { padding-bottom: 16px; flex: 1; }
+    .tl-round { font-size: 13px; font-weight: 500; color: var(--text); }
+    .tl-detail { font-size: 11px; color: var(--text3); margin-top: 2px; }
+    .tl-time { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+    /* Score distribution */
+    .score-bars { display: flex; flex-direction: column; gap: 8px; }
+    .score-row { display: flex; align-items: center; gap: 8px; }
+    .score-label { font-size: 11px; color: var(--text3); width: 50px; flex-shrink: 0; text-align: right; }
+    .score-bar-wrap { flex: 1; background: var(--surface2); border-radius: 2px; height: 14px; overflow: hidden; }
+    .score-bar { height: 100%; border-radius: 2px; }
+    .score-count { font-size: 11px; color: var(--text3); width: 36px; text-align: right; flex-shrink: 0; }
+
+    /* Confusion matrix */
+    .matrix { display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; align-items: center; }
+    .matrix-label { font-size: 11px; color: var(--text3); text-align: center; }
+    .matrix-cell { border-radius: var(--r-sm); padding: 14px 8px; text-align: center; }
+    .cell-tp { background: var(--teal-bg); }
+    .cell-tn { background: var(--green-bg); }
+    .cell-fp { background: var(--amber-bg); }
+    .cell-fn { background: var(--red-bg); }
+    .cell-val { font-size: 20px; font-weight: 600; }
+    .cell-tp .cell-val { color: var(--teal-text); }
+    .cell-tn .cell-val { color: var(--green-text); }
+    .cell-fp .cell-val { color: var(--amber-text); }
+    .cell-fn .cell-val { color: var(--red-text); }
+    .cell-lbl { font-size: 10px; margin-top: 2px; }
+    .cell-tp .cell-lbl { color: var(--teal-text); }
+    .cell-tn .cell-lbl { color: var(--green-text); }
+    .cell-fp .cell-lbl { color: var(--amber-text); }
+    .cell-fn .cell-lbl { color: var(--red-text); }
+
+    /* Chart wrapper */
+    .chart-wrap { position: relative; width: 100%; }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+    /* Alerts */
+    .alerts { display: flex; flex-direction: column; gap: 8px; }
+    .alert { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: var(--r-sm); }
+    .alert-high { background: var(--red-bg); border-left: 3px solid var(--red-border); }
+    .alert-med  { background: var(--amber-bg); border-left: 3px solid var(--amber-border); }
+    .alert-low  { background: var(--blue-bg); border-left: 3px solid var(--blue-border); }
+    .alert i { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+    .alert-high i { color: var(--red-text); }
+    .alert-med  i { color: var(--amber-text); }
+    .alert-low  i { color: var(--blue-text); }
+    .alert-body { flex: 1; }
+    .alert-title { font-size: 12px; font-weight: 500; }
+    .alert-high .alert-title { color: var(--red-text); }
+    .alert-med  .alert-title { color: var(--amber-text); }
+    .alert-low  .alert-title { color: var(--blue-text); }
+    .alert-desc { font-size: 11px; margin-top: 2px; }
+    .alert-high .alert-desc { color: var(--red-text); opacity: 0.8; }
+    .alert-med  .alert-desc { color: var(--amber-text); opacity: 0.8; }
+    .alert-low  .alert-desc { color: var(--blue-text); opacity: 0.8; }
+    .alert-time { font-size: 10px; color: var(--text3); flex-shrink: 0; margin-top: 2px; }
+
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .row2, .row3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">
+        <div class="logo-icon"><i class="ti ti-topology-star-3" aria-hidden="true"></i></div>
+        <div>
+          <div class="logo-name">FIFN</div>
+          <div class="logo-sub">Federation Dashboard</div>
+        </div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Overview</div>
+      <div class="nav-item active"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</div>
+      <div class="nav-item"><i class="ti ti-refresh" aria-hidden="true"></i> Federation rounds</div>
+      <div class="nav-item"><i class="ti ti-chart-line" aria-hidden="true"></i> Model performance</div>
+      <div class="nav-section">Network</div>
+      <div class="nav-item"><i class="ti ti-building-bank" aria-hidden="true"></i> Nodes</div>
+      <div class="nav-item"><i class="ti ti-shield-check" aria-hidden="true"></i> Privacy audit</div>
+      <div class="nav-item"><i class="ti ti-coin" aria-hidden="true"></i> Rewards</div>
+      <div class="nav-section">Operations</div>
+      <div class="nav-item"><i class="ti ti-file-text" aria-hidden="true"></i> Claims queue</div>
+      <div class="nav-item"><i class="ti ti-bell" aria-hidden="true"></i> Alerts</div>
+      <div class="nav-item"><i class="ti ti-settings" aria-hidden="true"></i> Config</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="node-badge">
+        <div class="node-dot"></div>
+        <div class="node-info">
+          <div class="node-id">insurer-a</div>
+          <div class="node-status">Node active · staked 500 FML</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">Overview</div>
+      <div class="topbar-right">
+        <div class="round-badge">
+          <div class="pulse"></div>
+          Round 14 · open
+        </div>
+        <button class="btn btn-primary"><i class="ti ti-player-play" aria-hidden="true"></i> Run round</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Metric cards -->
+      <div class="section-label">Network summary</div>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label"><i class="ti ti-building-bank" aria-hidden="true"></i> Active nodes</div>
+          <div class="metric-value">7</div>
+          <div class="metric-delta delta-up">↑ 2 since round 10</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label"><i class="ti ti-chart-bar" aria-hidden="true"></i> Global AUC-ROC</div>
+          <div class="metric-value">0.923</div>
+          <div class="metric-delta delta-up">↑ 0.034 vs. local baseline</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label"><i class="ti ti-file-invoice" aria-hidden="true"></i> Claims scored today</div>
+          <div class="metric-value">4,821</div>
+          <div class="metric-delta delta-up">↑ 12% vs. yesterday</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Flagged (≥ 0.7)</div>
+          <div class="metric-value">143</div>
+          <div class="metric-delta delta-down">↑ 18 new since 09:00</div>
+        </div>
+      </div>
+
+      <!-- AUC chart + Node list -->
+      <div class="row3">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Global model AUC-ROC per round</span>
+            <span class="card-action">Last 14 rounds</span>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#534AB7"></div> Global model</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#1D9E75; border:1px dashed #1D9E75"></div> Local baseline avg</div>
+          </div>
+          <div class="chart-wrap" style="height: 200px;">
+            <canvas id="aucChart" role="img" aria-label="Line chart showing global AUC-ROC improving from 0.81 to 0.92 over 14 federation rounds, consistently above the local baseline average of around 0.88.">Global AUC-ROC rose from 0.81 in round 1 to 0.923 in round 14.</canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Node participation</span>
+            <span class="card-action">Round 14</span>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">IA</div>
+            <div><div class="node-name">Insurer A</div><div class="node-meta">12,840 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-green">Submitted</span></div>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">IB</div>
+            <div><div class="node-name">Insurer B</div><div class="node-meta">4,210 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-green">Submitted</span></div>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">IC</div>
+            <div><div class="node-name">Insurer C</div><div class="node-meta">890 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-amber">Training</span></div>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">ID</div>
+            <div><div class="node-name">Insurer D</div><div class="node-meta">6,120 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-green">Submitted</span></div>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">IE</div>
+            <div><div class="node-name">Insurer E</div><div class="node-meta">2,310 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-blue">Waiting</span></div>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">IF</div>
+            <div><div class="node-name">Insurer F</div><div class="node-meta">3,780 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-green">Submitted</span></div>
+          </div>
+          <div class="node-row">
+            <div class="node-avatar">IG</div>
+            <div><div class="node-name">Insurer G</div><div class="node-meta">1,450 samples</div></div>
+            <div class="node-right"><span class="status-pill pill-red">Offline</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score distribution + Confusion matrix + Alerts -->
+      <div class="row3">
+        <div class="row2" style="margin-bottom: 0;">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Fraud score distribution</span>
+              <span class="card-action">Today · all nodes</span>
+            </div>
+            <div class="score-bars">
+              <div class="score-row"><span class="score-label">0.0–0.1</span><div class="score-bar-wrap"><div class="score-bar" style="width:82%;background:#9FE1CB"></div></div><span class="score-count">3,953</span></div>
+              <div class="score-row"><span class="score-label">0.1–0.2</span><div class="score-bar-wrap"><div class="score-bar" style="width:9%;background:#9FE1CB"></div></div><span class="score-count">428</span></div>
+              <div class="score-row"><span class="score-label">0.2–0.3</span><div class="score-bar-wrap"><div class="score-bar" style="width:3%;background:#9FE1CB"></div></div><span class="score-count">153</span></div>
+              <div class="score-row"><span class="score-label">0.3–0.5</span><div class="score-bar-wrap"><div class="score-bar" style="width:2%;background:#EF9F27"></div></div><span class="score-count">98</span></div>
+              <div class="score-row"><span class="score-label">0.5–0.7</span><div class="score-bar-wrap"><div class="score-bar" style="width:1.5%;background:#EF9F27"></div></div><span class="score-count">46</span></div>
+              <div class="score-row"><span class="score-label">0.7–0.9</span><div class="score-bar-wrap"><div class="score-bar" style="width:2%;background:#E24B4A"></div></div><span class="score-count">97</span></div>
+              <div class="score-row"><span class="score-label">0.9–1.0</span><div class="score-bar-wrap"><div class="score-bar" style="width:1%;background:#E24B4A"></div></div><span class="score-count">46</span></div>
+            </div>
+            <div style="margin-top:12px;padding-top:10px;border-top:0.5px solid var(--border);display:flex;gap:12px;font-size:11px;color:var(--text3);">
+              <span style="color:var(--teal-text);font-weight:500;">■</span> Clean (&lt;0.3)
+              <span style="color:var(--amber-text);font-weight:500;">■</span> Review (0.3–0.7)
+              <span style="color:var(--red-text);font-weight:500;">■</span> Fraud (≥0.7)
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Confusion matrix</span>
+              <span class="card-action">Round 13 holdout</span>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-bottom:10px;text-align:center;">Predicted →</div>
+            <div class="matrix">
+              <div></div>
+              <div class="matrix-label">Fraud</div>
+              <div class="matrix-label">Clean</div>
+              <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;color:var(--text3);text-align:center;">Actual →</div>
+              <div class="matrix-cell cell-tp"><div class="cell-val">1,284</div><div class="cell-lbl">True positive</div></div>
+              <div class="matrix-cell cell-fn"><div class="cell-val">98</div><div class="cell-lbl">False negative</div></div>
+              <div></div>
+              <div class="matrix-cell cell-fp"><div class="cell-val">312</div><div class="cell-lbl">False positive</div></div>
+              <div class="matrix-cell cell-tn"><div class="cell-val">18,940</div><div class="cell-lbl">True negative</div></div>
+            </div>
+            <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <div style="background:var(--surface2);border-radius:var(--r-sm);padding:8px;text-align:center;">
+                <div style="font-size:18px;font-weight:600;color:var(--text);">92.9%</div>
+                <div style="font-size:10px;color:var(--text3);">Precision</div>
+              </div>
+              <div style="background:var(--surface2);border-radius:var(--r-sm);padding:8px;text-align:center;">
+                <div style="font-size:18px;font-weight:600;color:var(--text);">92.9%</div>
+                <div style="font-size:10px;color:var(--text3);">Recall</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Recent alerts</span>
+            <span class="card-action">View all</span>
+          </div>
+          <div class="alerts">
+            <div class="alert alert-high">
+              <i class="ti ti-alert-circle"></i>
+              <div class="alert-body">
+                <div class="alert-title">High-confidence fraud cluster</div>
+                <div class="alert-desc">8 claims from insurer-b share agent ID, filed within 3 hours. Score: 0.97</div>
+              </div>
+              <div class="alert-time">2m ago</div>
+            </div>
+            <div class="alert alert-high">
+              <i class="ti ti-alert-circle"></i>
+              <div class="alert-body">
+                <div class="alert-title">Staged accident pattern</div>
+                <div class="alert-desc">CLM-29841 matches cross-insurer collision ring detected in round 11.</div>
+              </div>
+              <div class="alert-time">14m ago</div>
+            </div>
+            <div class="alert alert-med">
+              <i class="ti ti-exclamation-mark"></i>
+              <div class="alert-body">
+                <div class="alert-title">Node G went offline</div>
+                <div class="alert-desc">insurer-g missed round 14 submission deadline. Stake at risk.</div>
+              </div>
+              <div class="alert-time">31m ago</div>
+            </div>
+            <div class="alert alert-med">
+              <i class="ti ti-exclamation-mark"></i>
+              <div class="alert-body">
+                <div class="alert-title">Label drift — insurer-c</div>
+                <div class="alert-desc">Fraud base rate dropped from 4.2% → 1.8%. FedProx μ adjusted to 0.05.</div>
+              </div>
+              <div class="alert-time">1h ago</div>
+            </div>
+            <div class="alert alert-low">
+              <i class="ti ti-info-circle"></i>
+              <div class="alert-body">
+                <div class="alert-title">Round 13 aggregation complete</div>
+                <div class="alert-desc">Global model updated. AUC improved +0.007. Rewards distributed.</div>
+              </div>
+              <div class="alert-time">2h ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Round timeline -->
+      <div class="row2">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Round timeline</span>
+            <span class="card-action">Rounds 10–14</span>
+          </div>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-line"><div class="tl-dot" style="background:#534AB7"></div><div class="tl-connector"></div></div>
+              <div class="tl-content"><div class="tl-round">Round 14 <span style="font-size:10px;padding:2px 7px;background:var(--teal-bg);color:var(--teal-text);border-radius:10px;margin-left:4px;">Active</span></div><div class="tl-detail">4/7 nodes submitted · awaiting insurer-c, e, g</div><div class="tl-time">Started 47 min ago</div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div>
+              <div class="tl-content"><div class="tl-round">Round 13 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.916 → 0.923 · tx 0x4a2f…c81d</div><div class="tl-time">2h 12m ago · duration 38 min</div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div>
+              <div class="tl-content"><div class="tl-round">Round 12 — completed</div><div class="tl-detail">6/7 nodes · AUC 0.911 → 0.916 · insurer-g absent</div><div class="tl-time">5h ago · duration 42 min</div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div>
+              <div class="tl-content"><div class="tl-round">Round 11 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.904 → 0.911 · FedProx switched on</div><div class="tl-time">8h ago · duration 35 min</div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-line"><div class="tl-dot" style="background:#888780"></div></div>
+              <div class="tl-content"><div class="tl-round">Round 10 — completed</div><div class="tl-detail">5/7 nodes · AUC 0.895 → 0.904</div><div class="tl-time">11h ago · duration 51 min</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Per-node AUC contribution</span>
+            <span class="card-action">Round 13</span>
+          </div>
+          <div class="chart-wrap" style="height: 220px;">
+            <canvas id="nodeChart" role="img" aria-label="Horizontal bar chart showing each insurer node's local AUC versus the global model AUC of 0.923. Insurer A has the highest local AUC at 0.908; Insurer G is absent.">Node AUC values range from 0.871 (Insurer E) to 0.908 (Insurer A); global model at 0.923 outperforms all locals.</canvas>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const text3  = isDark ? '#68686466' : '#8a8a8666';
+const grid   = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+const text2  = isDark ? '#a0a09c' : '#5a5a57';
+
+Chart.defaults.font.family = 'system-ui, -apple-system, sans-serif';
+Chart.defaults.font.size   = 11;
+Chart.defaults.color       = text2;
+
+// AUC per round
+new Chart(document.getElementById('aucChart'), {
+  type: 'line',
+  data: {
+    labels: Array.from({length:14}, (_,i) => `R${i+1}`),
+    datasets: [
+      {
+        label: 'Global model',
+        data: [0.810,0.834,0.849,0.861,0.872,0.880,0.886,0.891,0.897,0.904,0.911,0.916,0.916,0.923],
+        borderColor: '#534AB7', backgroundColor: 'rgba(83,74,183,0.08)',
+        borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#534AB7', fill: true, tension: 0.35
+      },
+      {
+        label: 'Local baseline avg',
+        data: [0.792,0.793,0.794,0.796,0.797,0.797,0.798,0.799,0.800,0.800,0.801,0.801,0.802,0.802],
+        borderColor: '#1D9E75', borderDash: [4,3],
+        borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.3
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: grid }, ticks: { maxRotation: 0 } },
+      y: { grid: { color: grid }, min: 0.78, max: 0.94, ticks: { callback: v => v.toFixed(2) } }
+    }
+  }
+});
+
+// Per-node AUC
+new Chart(document.getElementById('nodeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Insurer A','Insurer B','Insurer C','Insurer D','Insurer E','Insurer F'],
+    datasets: [
+      {
+        label: 'Local AUC',
+        data: [0.908, 0.891, 0.879, 0.900, 0.871, 0.886],
+        backgroundColor: '#AFA9EC', borderRadius: 3
+      },
+      {
+        label: 'Global model',
+        data: [0.923, 0.923, 0.923, 0.923, 0.923, 0.923],
+        backgroundColor: 'rgba(83,74,183,0.0)', borderColor: '#534AB7',
+        borderWidth: 1.5, borderDash: [4,3], type: 'line',
+        pointRadius: 0, fill: false
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: grid }, min: 0.85, max: 0.93, ticks: { callback: v => v.toFixed(2) } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+</script>
+</body>
+</html>
