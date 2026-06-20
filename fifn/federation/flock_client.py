@@ -100,9 +100,21 @@ class MockFlockBackend:
         return self._round_id
 
     def _aggregate(self):
-        arrays = [
-            (np.frombuffer(w, dtype=np.float32), n) for w, n in self._submissions
-        ]
-        total = sum(n for _, n in arrays)
-        avg = sum(a * n / total for a, n in arrays)
-        self._global_weights = avg.tobytes()
+        import io
+        import torch
+
+        total = sum(n for _, n in self._submissions)
+        avg_state: dict | None = None
+
+        for weights_bytes, n in self._submissions:
+            state = torch.load(io.BytesIO(weights_bytes), weights_only=True)
+            scale = n / total
+            if avg_state is None:
+                avg_state = {k: v.float() * scale for k, v in state.items()}
+            else:
+                for k in avg_state:
+                    avg_state[k] += state[k].float() * scale
+
+        buf = io.BytesIO()
+        torch.save(avg_state, buf)
+        self._global_weights = buf.getvalue()
