@@ -1,0 +1,22 @@
+insurer_id: "insurer-a"
+data_path: "data/raw/claims.parquet"
+
+flock:
+  task_id: "your-flock-task-id"
+  api_key: "${FLOCK_API_KEY}"
+  mock: false        # set true for local dev without a live Flock.io task
+  encrypt: true
+
+model:
+  input_dim: 32      # update after running preprocessing to get actual feature count
+  hidden: 64
+  dropout: 0.3
+
+training:
+  lr: 0.001
+  epochs: 5
+  pos_weight: 10.0   # tune to your node's fraud base rate (fraud_count / total)
+
+privacy:
+  dp_noise_scale: 0.01   # Gaussian DP noise σ added to weights before upload
+  min_participants: 5    # enforced on-chain — protects against single-node inversion
