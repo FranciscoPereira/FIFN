@@ -1,50 +1,46 @@
-<svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" role="img">
+<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" role="img">
   <title>FIFN — Federated Insurance Fraud Network</title>
-  <desc>A network star topology mark of five nodes connected to a central hexagon, beside the wordmark FIFN and the tagline Federated Insurance Fraud Network.</desc>
 
-  <defs>
-    <style>
-      .wordmark { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 52px; letter-spacing: -2px; fill: #f0f0ec; }
-      .tagline  { font-family: 'Inter', system-ui, sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 0.5px; fill: #6a6a80; }
-      .sub      { font-family: 'Inter', system-ui, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 2px; fill: #9a96e0; }
-    </style>
-  </defs>
+  <rect width="320" height="180" fill="#0d0d12" rx="14"/>
 
-  <rect width="520" height="200" fill="#0d0d12" rx="16"/>
+  <polygon points="82,60 108,75 108,105 82,120 56,105 56,75"
+           fill="#161628" stroke="#7F77DD" stroke-width="1.5"/>
+  <circle cx="82" cy="90" r="7" fill="#7F77DD"/>
+  <path d="M82 79 L90 84 L90 93 Q90 101 82 105 Q74 101 74 93 L74 84 Z"
+        fill="none" stroke="#7F77DD" stroke-width="1.1" stroke-linejoin="round"/>
 
-  <!-- Center hexagon -->
-  <polygon points="100,72 124,86 124,114 100,128 76,114 76,86"
-           fill="#1e1e30" stroke="#7F77DD" stroke-width="1.5"/>
-  <circle cx="100" cy="100" r="7" fill="#7F77DD"/>
+  <line x1="82" y1="60" x2="82" y2="40" stroke="#3a3470" stroke-width="1" stroke-dasharray="3 2"/>
+  <circle cx="82" cy="33" r="6" fill="#161628" stroke="#534AB7" stroke-width="1.2"/>
+  <circle cx="82" cy="33" r="2.2" fill="#AFA9EC"/>
 
-  <!-- Outer nodes -->
-  <line x1="100" y1="72"  x2="100" y2="42"  stroke="#3C3489" stroke-width="1" stroke-dasharray="3 2"/>
-  <circle cx="100" cy="36" r="8" fill="#1e1e30" stroke="#534AB7" stroke-width="1.2"/>
-  <circle cx="100" cy="36" r="3" fill="#AFA9EC"/>
+  <line x1="108" y1="75" x2="128" y2="55" stroke="#3a3470" stroke-width="1" stroke-dasharray="3 2"/>
+  <circle cx="134" cy="49" r="6" fill="#161628" stroke="#534AB7" stroke-width="1.2"/>
+  <circle cx="134" cy="49" r="2.2" fill="#AFA9EC"/>
 
-  <line x1="124" y1="86"  x2="148" y2="62"  stroke="#3C3489" stroke-width="1" stroke-dasharray="3 2"/>
-  <circle cx="154" cy="56" r="8" fill="#1e1e30" stroke="#534AB7" stroke-width="1.2"/>
-  <circle cx="154" cy="56" r="3" fill="#AFA9EC"/>
+  <line x1="108" y1="105" x2="128" y2="125" stroke="#3a3470" stroke-width="1" stroke-dasharray="3 2"/>
+  <circle cx="134" cy="131" r="6" fill="#161628" stroke="#1D9E75" stroke-width="1.2"/>
+  <circle cx="134" cy="131" r="2.2" fill="#5DCAA5"/>
 
-  <line x1="124" y1="114" x2="152" y2="136" stroke="#3C3489" stroke-width="1" stroke-dasharray="3 2"/>
-  <circle cx="158" cy="142" r="8" fill="#1e1e30" stroke="#1D9E75" stroke-width="1.2"/>
-  <circle cx="158" cy="142" r="3" fill="#5DCAA5"/>
+  <line x1="56" y1="105" x2="36" y2="125" stroke="#3a3470" stroke-width="1" stroke-dasharray="3 2"/>
+  <circle cx="30" cy="131" r="6" fill="#161628" stroke="#1D9E75" stroke-width="1.2"/>
+  <circle cx="30" cy="131" r="2.2" fill="#5DCAA5"/>
 
-  <line x1="76"  y1="114" x2="48"  y2="136" stroke="#3C3489" stroke-width="1" stroke-dasharray="3 2"/>
-  <circle cx="42" cy="142" r="8" fill="#1e1e30" stroke="#1D9E75" stroke-width="1.2"/>
-  <circle cx="42" cy="142" r="3" fill="#5DCAA5"/>
+  <line x1="56" y1="75" x2="36" y2="55" stroke="#3a3470" stroke-width="1" stroke-dasharray="3 2"/>
+  <circle cx="30" cy="49" r="6" fill="#161628" stroke="#534AB7" stroke-width="1.2"/>
+  <circle cx="30" cy="49" r="2.2" fill="#AFA9EC"/>
 
-  <line x1="76"  y1="86"  x2="50"  y2="62"  stroke="#3C3489" stroke-width="1" stroke-dasharray="3 2"/>
-  <circle cx="44" cy="56" r="8" fill="#1e1e30" stroke="#534AB7" stroke-width="1.2"/>
-  <circle cx="44" cy="56" r="3" fill="#AFA9EC"/>
+  <text x="172" y="100"
+        font-family="'Inter', system-ui, sans-serif"
+        font-weight="700" font-size="52" letter-spacing="-1.5"
+        fill="#f0f0ec">FIFN</text>
 
-  <!-- Shield inside hex -->
-  <path d="M100 84 L110 89 L110 99 Q110 108 100 113 Q90 108 90 99 L90 89 Z"
-        fill="none" stroke="#7F77DD" stroke-width="1.2" stroke-linejoin="round"/>
+  <text x="174" y="122"
+        font-family="'Inter', system-ui, sans-serif"
+        font-weight="600" font-size="9" letter-spacing="2.2"
+        fill="#8a86d8">FEDERATED INSURANCE</text>
 
-  <!-- Wordmark -->
-  <text x="196" y="120" class="wordmark">FIFN</text>
-  <line x1="196" y1="132" x2="434" y2="132" stroke="#2a2a3a" stroke-width="0.75"/>
-  <text x="197" y="150" class="sub">FEDERATED INSURANCE</text>
-  <text x="197" y="167" class="tagline">Fraud Network · Powered by Flock.io</text>
+  <text x="174" y="138"
+        font-family="'Inter', system-ui, sans-serif"
+        font-weight="400" font-size="9" letter-spacing="0.3"
+        fill="#a0a0b8">Fraud Network · Flock.io</text>
 </svg>
