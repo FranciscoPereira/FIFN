@@ -1,3 +1,5 @@
+<img src="assets/logo.svg" alt="FIFN — Federated Insurance Fraud Network" width="520" />
+
 # Federated Insurance Fraud Network (FIFN)
 
 A decentralized fraud detection system enabling multiple small insurers to collaboratively train a shared model on their private claims data using [Flock.io](https://flock.io)'s secure, on-chain federated learning infrastructure — without exposing sensitive customer information.
