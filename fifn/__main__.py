@@ -45,6 +45,19 @@ def cmd_serve(args):
     )
 
 
+def cmd_prepare_kaggle(args):
+    from fifn.data.kaggle import prepare_kaggle
+
+    print(f"Preparing Kaggle dataset from {args.input} → {args.output_dir}/")
+    written = prepare_kaggle(
+        input_path=Path(args.input),
+        output_dir=Path(args.output_dir),
+        n_nodes=args.nodes,
+        seed=args.seed,
+    )
+    print(f"\nWrote {len(written)} node parquet files.")
+
+
 def cmd_score(args):
     import json
     import numpy as np
@@ -87,6 +100,13 @@ def main():
     p_serve.add_argument("--port", type=int, default=8000)
     p_serve.add_argument("--reload", action="store_true")
 
+    # prepare-kaggle
+    p_kaggle = sub.add_parser("prepare-kaggle", help="Preprocess Kaggle fraud_oracle.csv into per-node parquets")
+    p_kaggle.add_argument("--input", default="data/raw/fraud_oracle.csv", help="Path to fraud_oracle.csv")
+    p_kaggle.add_argument("--output-dir", default="data/nodes/", help="Directory to write per-node parquet files")
+    p_kaggle.add_argument("--nodes", type=int, default=7, help="Number of node partitions (1–7)")
+    p_kaggle.add_argument("--seed", type=int, default=42)
+
     # score
     p_score = sub.add_parser("score", help="Score a single claim from JSON features")
     p_score.add_argument("features", help='JSON array, e.g. "[[2, 180, ...]]"')
@@ -97,6 +117,7 @@ def main():
     dispatch = {
         "run-round": cmd_run_round,
         "generate-data": cmd_generate_data,
+        "prepare-kaggle": cmd_prepare_kaggle,
         "serve": cmd_serve,
         "score": cmd_score,
     }
