@@ -370,18 +370,18 @@
           </div>
           <div class="metric">
             <div class="metric-label"><i class="ti ti-chart-bar"></i> Global AUC-ROC</div>
-            <div class="metric-value">0.923</div>
-            <div class="metric-delta delta-up">↑ 0.034 vs. local baseline</div>
+            <div class="metric-value">0.776</div>
+            <div class="metric-delta delta-up">↑ 0.028 vs. local baseline</div>
           </div>
           <div class="metric">
             <div class="metric-label"><i class="ti ti-file-invoice"></i> Claims scored today</div>
-            <div class="metric-value" id="claims-count">4,821</div>
-            <div class="metric-delta delta-up">↑ 12% vs. yesterday</div>
+            <div class="metric-value" id="claims-count">1,542</div>
+            <div class="metric-delta delta-up">↑ 8% vs. yesterday</div>
           </div>
           <div class="metric">
             <div class="metric-label"><i class="ti ti-alert-triangle"></i> Flagged (≥ 0.7)</div>
-            <div class="metric-value" id="flagged-count">143</div>
-            <div class="metric-delta delta-down">↑ 18 new since 09:00</div>
+            <div class="metric-value" id="flagged-count">92</div>
+            <div class="metric-delta delta-down">↑ 11 new since 09:00</div>
           </div>
         </div>
 
@@ -472,10 +472,10 @@
             </div>
             <div class="timeline">
               <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#534AB7"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 14 <span style="font-size:10px;padding:2px 7px;background:var(--teal-bg);color:var(--teal-text);border-radius:10px;margin-left:4px">Active</span></div><div class="tl-detail">4/7 nodes submitted · awaiting BluePeak, Lakeside, Summit</div><div class="tl-time">Started 47 min ago</div></div></div>
-              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 13 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.916 → 0.923 · tx 0x4a2f…c81d</div><div class="tl-time">2h 12m ago · duration 38 min</div></div></div>
-              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 12 — completed</div><div class="tl-detail">6/7 nodes · AUC 0.911 → 0.916 · Summit Life absent</div><div class="tl-time">5h ago · duration 42 min</div></div></div>
-              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 11 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.904 → 0.911 · FedProx switched on</div><div class="tl-time">8h ago · duration 35 min</div></div></div>
-              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#888780"></div></div><div class="tl-content"><div class="tl-round">Round 10 — completed</div><div class="tl-detail">5/7 nodes · AUC 0.895 → 0.904</div><div class="tl-time">11h ago · duration 51 min</div></div></div>
+              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 13 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.772 → 0.774 · tx 0x4a2f…c81d</div><div class="tl-time">2h 12m ago · duration 38 min</div></div></div>
+              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 12 — completed</div><div class="tl-detail">6/7 nodes · AUC 0.769 → 0.772 · Summit Life absent</div><div class="tl-time">5h ago · duration 42 min</div></div></div>
+              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 11 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.763 → 0.769 · FedProx switched on</div><div class="tl-time">8h ago · duration 35 min</div></div></div>
+              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#888780"></div></div><div class="tl-content"><div class="tl-round">Round 10 — completed</div><div class="tl-detail">5/7 nodes · AUC 0.756 → 0.763</div><div class="tl-time">11h ago · duration 51 min</div></div></div>
             </div>
           </div>
 
@@ -531,7 +531,7 @@
           <p>AUC trajectory, loss curves, precision-recall, and ROC analysis across all rounds.</p>
         </div>
         <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
-          <div class="metric"><div class="metric-label"><i class="ti ti-chart-bar"></i> Current AUC-ROC</div><div class="metric-value">0.923</div><div class="metric-delta delta-up">↑ 0.113 since round 1</div></div>
+          <div class="metric"><div class="metric-label"><i class="ti ti-chart-bar"></i> Current AUC-ROC</div><div class="metric-value">0.776</div><div class="metric-delta delta-up">↑ 0.056 since round 1</div></div>
           <div class="metric"><div class="metric-label"><i class="ti ti-target-arrow"></i> Precision</div><div class="metric-value">92.9%</div><div class="metric-delta delta-up">↑ 1.1pp vs. round 12</div></div>
           <div class="metric"><div class="metric-label"><i class="ti ti-eye"></i> Recall</div><div class="metric-value">92.9%</div><div class="metric-delta delta-up">Stable</div></div>
         </div>
@@ -782,21 +782,21 @@ const ROUNDS = [
   {r:7,  nodes:6, before:0.880, after:0.886, dur:38, tx:'0x7062…4887', date:'2026-05-12'},
   {r:8,  nodes:6, before:0.886, after:0.891, dur:40, tx:'0x8173…5998', date:'2026-05-13'},
   {r:9,  nodes:7, before:0.891, after:0.897, dur:37, tx:'0x9284…6aa9', date:'2026-05-14'},
-  {r:10, nodes:5, before:0.897, after:0.904, dur:51, tx:'0xa395…7bba', date:'2026-05-15'},
-  {r:11, nodes:7, before:0.904, after:0.911, dur:35, tx:'0xde04…7c4e', date:'2026-05-16'},
-  {r:12, nodes:6, before:0.911, after:0.916, dur:42, tx:'0x82b1…33a9', date:'2026-05-17'},
-  {r:13, nodes:7, before:0.916, after:0.923, dur:38, tx:'0x4a2f…c81d', date:'2026-05-18'},
-  {r:14, nodes:4, before:0.923, after:null,  dur:null, tx:'—',          date:'2026-06-21', active:true},
+  {r:10, nodes:5, before:0.752, after:0.756, dur:51, tx:'0xa395…7bba', date:'2026-05-15'},
+  {r:11, nodes:7, before:0.756, after:0.763, dur:35, tx:'0xde04…7c4e', date:'2026-05-16'},
+  {r:12, nodes:6, before:0.763, after:0.769, dur:42, tx:'0x82b1…33a9', date:'2026-05-17'},
+  {r:13, nodes:7, before:0.769, after:0.774, dur:38, tx:'0x4a2f…c81d', date:'2026-05-18'},
+  {r:14, nodes:4, before:0.774, after:null,  dur:null, tx:'—',          date:'2026-06-21', active:true},
 ];
 
 const NODES_DATA = [
-  {id:'MA', name:'Meridian Auto Group',       status:'submitted', samples:12840, auc:0.908, stake:500,  fml:1842, rounds:13, last:'2 min ago'},
-  {id:'CS', name:'Coastal Shield Insurance',  status:'submitted', samples:4210,  auc:0.891, stake:500,  fml:924,  rounds:13, last:'5 min ago'},
-  {id:'BP', name:'BluePeak Mutual',           status:'training',  samples:890,   auc:0.879, stake:500,  fml:412,  rounds:11, last:'11 min ago'},
-  {id:'HG', name:'Hartwell General',          status:'submitted', samples:6120,  auc:0.900, stake:500,  fml:1241, rounds:13, last:'3 min ago'},
-  {id:'LH', name:'Lakeside Health Plans',     status:'waiting',   samples:2310,  auc:0.871, stake:500,  fml:687,  rounds:12, last:'8 min ago'},
-  {id:'RP', name:'Redwood P&C',               status:'submitted', samples:3780,  auc:0.886, stake:500,  fml:891,  rounds:13, last:'4 min ago'},
-  {id:'SL', name:'Summit Life & Casualty',    status:'offline',   samples:1450,  auc:null,  stake:500,  fml:334,  rounds:10, last:'31 min ago'},
+  {id:'MA', name:'Meridian Auto Group',       status:'submitted', samples:483,  auc:0.745, stake:500,  fml:1842, rounds:13, last:'2 min ago'},
+  {id:'CS', name:'Coastal Shield Insurance',  status:'submitted', samples:124,  auc:0.856, stake:500,  fml:924,  rounds:13, last:'5 min ago'},
+  {id:'BP', name:'BluePeak Mutual',           status:'training',  samples:4093, auc:0.766, stake:500,  fml:412,  rounds:11, last:'11 min ago'},
+  {id:'HG', name:'Hartwell General',          status:'submitted', samples:3234, auc:0.721, stake:500,  fml:1241, rounds:13, last:'3 min ago'},
+  {id:'LH', name:'Lakeside Health Plans',     status:'waiting',   samples:368,  auc:0.909, stake:500,  fml:687,  rounds:12, last:'8 min ago'},
+  {id:'RP', name:'Redwood P&C',               status:'submitted', samples:480,  auc:0.774, stake:500,  fml:891,  rounds:13, last:'4 min ago'},
+  {id:'SL', name:'Summit Life & Casualty',    status:'offline',   samples:6638, auc:0.738, stake:500,  fml:334,  rounds:10, last:'31 min ago'},
 ];
 
 const ALERTS_DATA = [
@@ -1054,8 +1054,8 @@ function renderLeaderboard() {
 function saveConfig() { toast('Configuration saved and applied.', 'success'); }
 
 // ── Chart factories ───────────────────────────────────────────────────────────
-const AUC_GLOBAL = [0.810,0.834,0.849,0.861,0.872,0.880,0.886,0.891,0.897,0.904,0.911,0.916,0.916,0.923];
-const AUC_LOCAL  = [0.792,0.793,0.794,0.796,0.797,0.797,0.798,0.799,0.800,0.800,0.801,0.801,0.802,0.802];
+const AUC_GLOBAL = [0.720,0.728,0.735,0.741,0.747,0.752,0.756,0.760,0.763,0.766,0.769,0.772,0.774,0.776];
+const AUC_LOCAL  = [0.735,0.736,0.736,0.737,0.737,0.738,0.738,0.739,0.739,0.740,0.740,0.748,0.748,0.748];
 const ROUND_LABELS = Array.from({length:14},(_,i)=>`R${i+1}`);
 const registeredCharts = {};
 
@@ -1075,22 +1075,22 @@ function initViewCharts(view) {
     mkChart('aucChart', {type:'line', data:{labels:ROUND_LABELS, datasets:[
       {label:'Global model', data:AUC_GLOBAL, borderColor:'#534AB7', backgroundColor:'rgba(83,74,183,0.08)', borderWidth:2, pointRadius:3, pointBackgroundColor:'#534AB7', fill:true, tension:0.35},
       {label:'Local baseline avg', data:AUC_LOCAL, borderColor:'#1D9E75', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false, tension:0.3},
-    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid},ticks:{maxRotation:0}}, y:{grid:{color:grid},min:0.78,max:0.94,ticks:{callback:v=>v.toFixed(2)}}}}});
+    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid},ticks:{maxRotation:0}}, y:{grid:{color:grid},min:0.70,max:0.92,ticks:{callback:v=>v.toFixed(2)}}}}});
 
     mkChart('nodeChart', {type:'bar', data:{labels:['Meridian Auto','Coastal Shield','BluePeak Mutual','Hartwell General','Lakeside Health','Redwood P&C'],
       datasets:[
-        {label:'Local AUC', data:[0.908,0.891,0.879,0.900,0.871,0.886], backgroundColor:'#AFA9EC', borderRadius:3},
-        {label:'Global model', data:[0.923,0.923,0.923,0.923,0.923,0.923], backgroundColor:'rgba(0,0,0,0)', borderColor:'#534AB7', borderWidth:1.5, borderDash:[4,3], type:'line', pointRadius:0, fill:false},
-      ]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid},min:0.85,max:0.93,ticks:{callback:v=>v.toFixed(2)}}, y:{grid:{display:false}}}}});
+        {label:'Local AUC', data:[0.745,0.856,0.766,0.721,0.909,0.774], backgroundColor:'#AFA9EC', borderRadius:3},
+        {label:'Global model', data:[0.776,0.776,0.776,0.776,0.776,0.776], backgroundColor:'rgba(0,0,0,0)', borderColor:'#534AB7', borderWidth:1.5, borderDash:[4,3], type:'line', pointRadius:0, fill:false},
+      ]}, options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid},min:0.68,max:0.93,ticks:{callback:v=>v.toFixed(2)}}, y:{grid:{display:false}}}}});
   }
 
   if (view === 'performance') {
     mkChart('perfAucChart', {type:'line', data:{labels:ROUND_LABELS, datasets:[
       {label:'Global model', data:AUC_GLOBAL, borderColor:'#534AB7', backgroundColor:'rgba(83,74,183,0.08)', borderWidth:2, pointRadius:3, pointBackgroundColor:'#534AB7', fill:true, tension:0.35},
       {label:'Local avg',    data:AUC_LOCAL,  borderColor:'#1D9E75', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false, tension:0.3},
-    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid}}, y:{grid:{color:grid},min:0.78,max:0.94,ticks:{callback:v=>v.toFixed(2)}}}}});
+    ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid}}, y:{grid:{color:grid},min:0.70,max:0.92,ticks:{callback:v=>v.toFixed(2)}}}}});
 
-    const lossVals = [0.421,0.384,0.362,0.341,0.324,0.311,0.302,0.293,0.285,0.279,0.271,0.267,0.264,0.261];
+    const lossVals = [0.512,0.489,0.471,0.456,0.443,0.432,0.423,0.415,0.408,0.402,0.397,0.393,0.390,0.387];
     mkChart('lossChart', {type:'line', data:{labels:ROUND_LABELS, datasets:[
       {label:'Mean loss', data:lossVals, borderColor:'#EF9F27', backgroundColor:'rgba(239,159,39,0.08)', borderWidth:2, pointRadius:3, pointBackgroundColor:'#EF9F27', fill:true, tension:0.35},
     ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid}}, y:{grid:{color:grid},ticks:{callback:v=>v.toFixed(3)}}}}});
