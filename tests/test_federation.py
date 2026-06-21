@@ -29,10 +29,11 @@ def test_mock_aggregates_after_min_participants():
     assert len(global_weights) > 0
 
 
-def test_mock_no_global_model_before_round():
+def test_mock_returns_initial_model_before_round():
+    """Backend auto-initialises a fresh model for round 0 so nodes can start training."""
     backend = MockFlockBackend(min_participants=2)
-    with pytest.raises(RuntimeError):
-        backend.get_global_model("round-0")
+    weights = backend.get_global_model("round-0")
+    assert isinstance(weights, bytes) and len(weights) > 0
 
 
 def test_await_aggregation_advances_round():

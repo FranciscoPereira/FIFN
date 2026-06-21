@@ -97,3 +97,33 @@ class LocalTrainer:
         self.model.eval()
         with torch.no_grad():
             return self.model(torch.tensor(X, dtype=torch.float32)).numpy()
+
+    def evaluate_auc(self, X: np.ndarray, y: np.ndarray) -> float:
+        from sklearn.metrics import roc_auc_score
+
+        scores = self.score(X)
+        if len(np.unique(y)) < 2:
+            return float("nan")
+        return float(roc_auc_score(y, scores))
+
+
+def save_model(model: FraudNet, path) -> None:
+    import io, pathlib
+
+    buf = io.BytesIO()
+    torch.save(
+        {"state_dict": model.state_dict(), "input_dim": model.net[0].in_features},
+        buf,
+    )
+    p = pathlib.Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_bytes(buf.getvalue())
+
+
+def load_model(path) -> FraudNet:
+    import pathlib
+
+    data = torch.load(pathlib.Path(path), weights_only=True)
+    model = FraudNet(input_dim=data["input_dim"])
+    model.load_state_dict(data["state_dict"])
+    return model

@@ -61,11 +61,24 @@ class MockFlockBackend:
     Auto-aggregates once ≥ min_participants submissions arrive.
     """
 
-    def __init__(self, min_participants: int = 2):
+    def __init__(self, min_participants: int = 2, input_dim: int = 32, hidden: int = 64):
         self._round_num = 0
         self._min_participants = min_participants
+        self._input_dim = input_dim
+        self._hidden = hidden
         self._submissions: list[tuple[bytes, int]] = []
         self._global_weights: bytes | None = None
+
+    def _make_initial_model(self) -> bytes:
+        """Serialize a freshly initialized FraudNet as the round-0 global model."""
+        import io
+        import torch
+        from fifn.model.fraud_net import FraudNet
+
+        model = FraudNet(input_dim=self._input_dim, hidden=self._hidden)
+        buf = io.BytesIO()
+        torch.save(model.state_dict(), buf)
+        return buf.getvalue()
 
     @property
     def _round_id(self) -> str:
@@ -80,7 +93,8 @@ class MockFlockBackend:
 
     def get_global_model(self, round_id: str) -> bytes:
         if self._global_weights is None:
-            raise RuntimeError("No global model yet — complete at least one round.")
+            # First round — return a freshly initialized model so nodes can start training
+            self._global_weights = self._make_initial_model()
         return self._global_weights
 
     def submit_update(self, round_id: str, weights: bytes, n_samples: int) -> str:
