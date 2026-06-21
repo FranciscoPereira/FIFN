@@ -8,53 +8,53 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0d0d12;
-      --bg2: #13131a;
-      --surface: #1a1a24;
-      --surface2: #22222f;
-      --border: rgba(255,255,255,0.08);
-      --border2: rgba(255,255,255,0.14);
-      --text: #f0f0ec;
-      --text2: #9898a0;
-      --text3: #5a5a66;
-      --purple: #7F77DD;
-      --purple-light: #AFA9EC;
-      --purple-dim: rgba(127,119,221,0.12);
-      --purple-glow: rgba(127,119,221,0.25);
-      --teal: #1D9E75;
-      --teal-light: #5DCAA5;
-      --amber: #EF9F27;
-      --r: 12px; --r-sm: 8px; --r-lg: 18px;
-      --max: 1100px;
+      --bg: #0d0d12; --bg2: #13131a; --surface: #1a1a24; --surface2: #22222f;
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+      --text: #f0f0ec; --text2: #9898a0; --text3: #5a5a66;
+      --purple: #7F77DD; --purple-light: #AFA9EC;
+      --purple-dim: rgba(127,119,221,0.12); --purple-glow: rgba(127,119,221,0.25);
+      --teal: #1D9E75; --teal-light: #5DCAA5; --amber: #EF9F27;
+      --r: 12px; --r-sm: 8px; --r-lg: 18px; --max: 1100px;
     }
     html { scroll-behavior: smooth; }
     body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px; }
     a { color: inherit; text-decoration: none; }
 
-    /* Nav */
+    /* ── Nav ─────────────────────────────────────────────────────────────── */
     nav { position: sticky; top: 0; z-index: 100; background: rgba(13,13,18,0.88); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
     .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { display: flex; align-items: center; gap: 10px; }
     .nav-icon { width: 32px; height: 32px; background: var(--purple-dim); border: 0.5px solid var(--purple); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .nav-icon i { font-size: 17px; color: var(--purple-light); }
-    .nav-brand { font-size: 17px; font-weight: 600; letter-spacing: -0.3px; color: var(--text); }
+    .nav-brand { font-size: 17px; font-weight: 600; letter-spacing: -0.3px; }
     .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.15s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.15s; position: relative; padding-bottom: 2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1.5px; background:var(--purple-light); transition:width 0.2s; }
+    .nav-links a.active, .nav-links a:hover { color: var(--text); }
+    .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
     .nav-cta { display: flex; align-items: center; gap: 10px; }
     .btn-ghost { padding: 7px 16px; border-radius: var(--r-sm); border: 0.5px solid var(--border2); font-size: 13px; color: var(--text2); cursor: pointer; transition: all 0.15s; font-family: inherit; background: transparent; }
     .btn-ghost:hover { border-color: var(--purple); color: var(--purple-light); }
     .btn-purple { padding: 8px 18px; border-radius: var(--r-sm); border: none; font-size: 13px; font-weight: 500; color: #fff; cursor: pointer; background: var(--purple); font-family: inherit; transition: opacity 0.15s; }
     .btn-purple:hover { opacity: 0.85; }
 
-    /* Hero */
+    /* Hamburger */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--text2); font-size: 22px; padding: 4px; }
+    .mobile-nav { display: none; position: fixed; inset: 60px 0 0; background: rgba(13,13,18,0.98); backdrop-filter: blur(16px); z-index: 99; flex-direction: column; padding: 28px 32px; gap: 0; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 18px; font-weight: 500; color: var(--text2); padding: 16px 0; border-bottom: 0.5px solid var(--border); transition: color 0.15s; }
+    .mobile-nav a:last-of-type { border-bottom: none; }
+    .mobile-nav a:hover { color: var(--text); }
+    .mobile-nav-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+
+    /* ── Hero ────────────────────────────────────────────────────────────── */
     .hero { max-width: var(--max); margin: 0 auto; padding: 100px 32px 80px; text-align: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--purple-dim); border: 0.5px solid var(--purple); font-size: 12px; color: var(--purple-light); margin-bottom: 28px; }
     .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-light); animation: pulse 2.4s infinite; }
     @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
-    h1 { font-size: clamp(36px, 5vw, 62px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.08; color: var(--text); margin-bottom: 22px; }
+    h1 { font-size: clamp(36px,5vw,62px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.08; margin-bottom: 22px; }
     h1 em { font-style: normal; color: var(--purple-light); }
-    .hero-sub { font-size: clamp(16px, 2vw, 19px); color: var(--text2); max-width: 580px; margin: 0 auto 36px; line-height: 1.65; }
+    .hero-sub { font-size: clamp(16px,2vw,19px); color: var(--text2); max-width: 580px; margin: 0 auto 36px; line-height: 1.65; }
     .hero-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
     .btn-hero { padding: 13px 28px; border-radius: var(--r-sm); font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.15s; border: none; }
     .btn-hero-primary { background: var(--purple); color: #fff; }
@@ -63,31 +63,52 @@
     .btn-hero-outline:hover { border-color: var(--border2); color: var(--text); background: var(--surface); }
     .hero-stat-row { display: flex; justify-content: center; gap: 48px; margin-top: 64px; padding-top: 48px; border-top: 0.5px solid var(--border); flex-wrap: wrap; }
     .hero-stat { text-align: center; }
-    .hero-stat-value { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: -1px; }
+    .hero-stat-value { font-size: 32px; font-weight: 700; letter-spacing: -1px; }
     .hero-stat-label { font-size: 13px; color: var(--text3); margin-top: 3px; }
 
-    /* Section wrapper */
+    /* ── Section ─────────────────────────────────────────────────────────── */
     section { max-width: var(--max); margin: 0 auto; padding: 80px 32px; }
     .section-tag { font-size: 11px; font-weight: 600; color: var(--purple-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-    h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; letter-spacing: -0.8px; color: var(--text); margin-bottom: 14px; line-height: 1.2; }
+    h2 { font-size: clamp(26px,3.5vw,38px); font-weight: 700; letter-spacing: -0.8px; margin-bottom: 14px; line-height: 1.2; }
     .section-sub { font-size: 17px; color: var(--text2); max-width: 520px; line-height: 1.65; margin-bottom: 48px; }
-
-    /* Divider */
     .divider { border: none; border-top: 0.5px solid var(--border); max-width: var(--max); margin: 0 auto; }
 
-    /* How it works */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
-    .step { background: var(--bg2); padding: 28px 24px; }
+    /* ── How it works ────────────────────────────────────────────────────── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+    .step { background: var(--bg2); padding: 28px 24px; transition: background 0.2s; }
+    .step:hover { background: var(--surface); }
     .step-num { font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: 0.5px; margin-bottom: 16px; }
     .step-icon { width: 38px; height: 38px; border-radius: var(--r-sm); background: var(--purple-dim); border: 0.5px solid var(--purple); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
     .step-icon i { font-size: 20px; color: var(--purple-light); }
-    .step-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .step-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
     .step-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
-    /* Benefits */
-    .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-    .benefit { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: border-color 0.2s; }
-    .benefit:hover { border-color: var(--border2); }
+    /* ── Architecture ────────────────────────────────────────────────────── */
+    .arch { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 40px; overflow: hidden; position: relative; }
+    .arch-grid { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+    .arch-nodes { display: flex; flex-direction: column; gap: 10px; }
+    .arch-node { background: var(--bg2); border: 0.5px solid var(--border2); border-radius: var(--r-sm); padding: 10px 16px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); white-space: nowrap; transition: border-color 0.3s; }
+    .arch-node i { font-size: 15px; color: var(--purple-light); }
+    .arch-node.active-node { border-color: var(--purple); }
+    .arch-arrow { padding: 0 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .arch-arrow-line { width: 60px; height: 1px; background: linear-gradient(90deg,var(--purple),var(--teal)); position: relative; }
+    .arch-arrow-line::after { content:''; position:absolute; right:-4px; top:-3px; border:4px solid transparent; border-left:6px solid var(--teal); }
+    .arch-arrow-label { font-size: 10px; color: var(--text3); white-space: nowrap; }
+    .arch-center { background: var(--purple-dim); border: 0.5px solid var(--purple); border-radius: var(--r-lg); padding: 24px 28px; text-align: center; }
+    .arch-center-icon { font-size: 28px; color: var(--purple-light); margin-bottom: 8px; }
+    .arch-center h4 { font-size: 14px; font-weight: 600; color: var(--purple-light); }
+    .arch-center p { font-size: 11px; color: var(--text3); margin-top: 4px; }
+    .arch-out { background: rgba(29,158,117,0.1); border: 0.5px solid rgba(29,158,117,0.4); border-radius: var(--r-lg); padding: 24px 28px; text-align: center; }
+    .arch-out i { font-size: 28px; color: var(--teal-light); margin-bottom: 8px; display: block; }
+    .arch-out h4 { font-size: 14px; font-weight: 600; color: var(--teal-light); }
+    .arch-out p { font-size: 11px; color: var(--text3); margin-top: 4px; }
+    /* Animated data packets */
+    .packet { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--purple-light); opacity: 0; pointer-events: none; }
+
+    /* ── Benefits ────────────────────────────────────────────────────────── */
+    .benefits { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 16px; }
+    .benefit { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px; transition: border-color 0.2s, transform 0.2s; }
+    .benefit:hover { border-color: var(--border2); transform: translateY(-2px); }
     .benefit-icon { width: 42px; height: 42px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
     .benefit-icon i { font-size: 22px; }
     .bi-purple { background: var(--purple-dim); border: 0.5px solid var(--purple); }
@@ -96,31 +117,28 @@
     .bi-teal i { color: var(--teal-light); }
     .bi-amber { background: rgba(239,159,39,0.1); border: 0.5px solid rgba(239,159,39,0.35); }
     .bi-amber i { color: var(--amber); }
-    .benefit h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .benefit h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
     .benefit p { font-size: 14px; color: var(--text2); line-height: 1.65; }
 
-    /* Architecture diagram */
-    .arch { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 40px; }
-    .arch-grid { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
-    .arch-nodes { display: flex; flex-direction: column; gap: 10px; }
-    .arch-node { background: var(--bg2); border: 0.5px solid var(--border2); border-radius: var(--r-sm); padding: 10px 16px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); white-space: nowrap; }
-    .arch-node i { font-size: 15px; color: var(--purple-light); }
-    .arch-arrow { padding: 0 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .arch-arrow-line { width: 60px; height: 1px; background: linear-gradient(90deg, var(--purple), var(--teal)); position: relative; }
-    .arch-arrow-line::after { content:''; position:absolute; right:-4px; top:-3px; border:4px solid transparent; border-left:6px solid var(--teal); }
-    .arch-arrow-label { font-size: 10px; color: var(--text3); white-space: nowrap; }
-    .arch-center { background: var(--purple-dim); border: 0.5px solid var(--purple); border-radius: var(--r-lg); padding: 24px 28px; text-align: center; }
-    .arch-center-icon { font-size: 28px; color: var(--purple-light); margin-bottom: 8px; }
-    .arch-center h4 { font-size: 14px; font-weight: 600; color: var(--purple-light); }
-    .arch-center p { font-size: 11px; color: var(--text3); margin-top: 4px; }
+    /* ── Testimonials ────────────────────────────────────────────────────── */
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; }
+    .testimonial { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 24px; transition: border-color 0.2s; }
+    .testimonial:hover { border-color: var(--border2); }
+    .testimonial-quote { font-size: 15px; line-height: 1.65; margin-bottom: 20px; }
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--purple-dim); border: 0.5px solid var(--purple); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--purple-light); flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 500; }
+    .author-role { font-size: 11px; color: var(--text3); }
 
-    /* Pricing */
-    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-    .plan { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column; }
+    /* ── Pricing ─────────────────────────────────────────────────────────── */
+    .plans { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
+    .plan { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column; transition: border-color 0.2s; }
+    .plan:hover { border-color: var(--border2); }
     .plan-featured { border-color: var(--purple); }
+    .plan-featured:hover { border-color: var(--purple-light); }
     .plan-tag { font-size: 10px; font-weight: 600; color: var(--purple-light); text-transform: uppercase; letter-spacing: 0.8px; background: var(--purple-dim); padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 16px; width: fit-content; }
-    .plan-name { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-    .plan-price { font-size: 34px; font-weight: 700; color: var(--text); letter-spacing: -1px; margin-bottom: 4px; }
+    .plan-name { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+    .plan-price { font-size: 34px; font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
     .plan-price span { font-size: 14px; font-weight: 400; color: var(--text3); }
     .plan-desc { font-size: 13px; color: var(--text2); margin-bottom: 22px; line-height: 1.6; }
     .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; flex: 1; }
@@ -134,41 +152,67 @@
     .plan-btn-filled { background: var(--purple); border: none; color: #fff; }
     .plan-btn-filled:hover { opacity: 0.85; }
 
-    /* Testimonials */
-    .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    .testimonial { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 24px; }
-    .testimonial-quote { font-size: 15px; color: var(--text); line-height: 1.65; margin-bottom: 20px; }
-    .testimonial-author { display: flex; align-items: center; gap: 10px; }
-    .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--purple-dim); border: 0.5px solid var(--purple); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--purple-light); flex-shrink: 0; }
-    .author-name { font-size: 13px; font-weight: 500; color: var(--text); }
-    .author-role { font-size: 11px; color: var(--text3); }
-
-    /* FAQ */
+    /* ── FAQ ─────────────────────────────────────────────────────────────── */
     .faq { display: flex; flex-direction: column; gap: 1px; border: 0.5px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
     .faq-item { background: var(--surface); }
-    .faq-q { padding: 20px 24px; font-size: 15px; font-weight: 500; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    .faq-q i { font-size: 16px; color: var(--text3); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-q { padding: 20px 24px; font-size: 15px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; user-select: none; }
+    .faq-q i { font-size: 16px; color: var(--text3); flex-shrink: 0; transition: transform 0.25s; }
     .faq-item.open .faq-q i { transform: rotate(45deg); }
-    .faq-a { font-size: 14px; color: var(--text2); line-height: 1.7; padding: 0 24px 20px; display: none; }
-    .faq-item.open .faq-a { display: block; }
+    .faq-a { font-size: 14px; color: var(--text2); line-height: 1.7; padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
 
-    /* CTA */
-    .cta-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 60px 48px; text-align: center; }
+    /* ── CTA ─────────────────────────────────────────────────────────────── */
+    .cta-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r-lg); padding: 60px 48px; text-align: center; position: relative; overflow: hidden; }
+    .cta-wrap::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, var(--purple-glow), transparent 70%); pointer-events:none; }
     .cta-wrap h2 { margin-bottom: 14px; }
     .cta-wrap p { color: var(--text2); font-size: 17px; max-width: 480px; margin: 0 auto 32px; }
     .cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
-    /* Footer */
+    /* ── Footer ──────────────────────────────────────────────────────────── */
     footer { border-top: 0.5px solid var(--border); }
-    .footer-inner { max-width: var(--max); margin: 0 auto; padding: 40px 32px; display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 32px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; padding: 40px 32px; display: grid; grid-template-columns: 1.5fr repeat(3,1fr); gap: 32px; }
     .footer-brand p { font-size: 13px; color: var(--text3); margin-top: 10px; max-width: 220px; line-height: 1.6; }
+    .footer-social { display: flex; gap: 10px; margin-top: 16px; }
+    .footer-social a { width: 30px; height: 30px; border-radius: 6px; background: var(--surface); border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: 15px; transition: all 0.15s; }
+    .footer-social a:hover { border-color: var(--purple); color: var(--purple-light); }
     .footer-col h4 { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
     .footer-col a { display: block; font-size: 13px; color: var(--text2); margin-bottom: 9px; transition: color 0.15s; }
     .footer-col a:hover { color: var(--text); }
-    .footer-bottom { max-width: var(--max); margin: 0 auto; padding: 20px 32px; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text3); }
+    .footer-bottom { max-width: var(--max); margin: 0 auto; padding: 20px 32px; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text3); flex-wrap: wrap; gap: 8px; }
 
+    /* ── Apply modal ─────────────────────────────────────────────────────── */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-backdrop.open { display: flex; }
+    .modal { background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--r-lg); padding: 36px; width: 100%; max-width: 480px; position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 20px; }
+    .modal-close:hover { color: var(--text); }
+    .modal h3 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+    .modal-sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; }
+    .modal-form { display: flex; flex-direction: column; gap: 14px; }
+    .modal-field { display: flex; flex-direction: column; gap: 5px; }
+    .modal-label { font-size: 13px; font-weight: 500; color: var(--text2); }
+    .modal-input { background: var(--surface2); border: 0.5px solid var(--border2); border-radius: var(--r-sm); padding: 10px 14px; font-size: 14px; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.15s; }
+    .modal-input:focus { border-color: var(--purple); }
+    .modal-input::placeholder { color: var(--text3); }
+    .modal-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a5a66' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+    .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 6px; }
+    .modal-submit { flex: 1; padding: 12px; background: var(--purple); border: none; border-radius: var(--r-sm); color: #fff; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; transition: opacity 0.15s; }
+    .modal-submit:hover { opacity: 0.85; }
+    .modal-cancel { padding: 12px 18px; background: transparent; border: 0.5px solid var(--border2); border-radius: var(--r-sm); color: var(--text2); font-size: 14px; cursor: pointer; font-family: inherit; }
+    .modal-cancel:hover { color: var(--text); }
+    .modal-success { text-align: center; padding: 20px 0; display: none; }
+    .modal-success i { font-size: 48px; color: var(--teal-light); margin-bottom: 16px; display: block; }
+    .modal-success h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .modal-success p { font-size: 14px; color: var(--text2); }
+
+    /* Sign-in modal */
+    .signin-modal { max-width: 400px; }
+
+    /* ── Responsive ──────────────────────────────────────────────────────── */
     @media (max-width: 700px) {
-      .nav-links { display: none; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
       h1 { letter-spacing: -0.8px; }
       .hero { padding: 64px 20px 48px; }
       section { padding: 56px 20px; }
@@ -176,13 +220,92 @@
       .arch-grid { flex-direction: column; }
       .arch-arrow { transform: rotate(90deg); }
       .footer-inner { grid-template-columns: 1fr 1fr; }
+      .cta-wrap { padding: 40px 24px; }
+      .modal-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- Apply modal -->
+<div class="modal-backdrop" id="apply-modal" onclick="closeModalOnBackdrop(event,'apply-modal')">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="apply-title">
+    <button class="modal-close" onclick="closeModal('apply-modal')" aria-label="Close"><i class="ti ti-x"></i></button>
+    <div id="apply-form-content">
+      <h3 id="apply-title">Apply to join FIFN</h3>
+      <p class="modal-sub">Applications are reviewed within 2 business days. You can run your first federation round the same day you're approved.</p>
+      <form class="modal-form" onsubmit="submitApply(event)">
+        <div class="modal-row">
+          <div class="modal-field"><label class="modal-label">First name</label><input class="modal-input" placeholder="Maria" required /></div>
+          <div class="modal-field"><label class="modal-label">Last name</label><input class="modal-input" placeholder="Kovacs" required /></div>
+        </div>
+        <div class="modal-field"><label class="modal-label">Work email</label><input class="modal-input" type="email" placeholder="maria@insurer.com" required /></div>
+        <div class="modal-field"><label class="modal-label">Company / organisation</label><input class="modal-input" placeholder="Regional Auto Insurer Ltd." required /></div>
+        <div class="modal-row">
+          <div class="modal-field"><label class="modal-label">Tier</label>
+            <select class="modal-input modal-select">
+              <option>Observer (Free)</option>
+              <option selected>Participant (500 FML)</option>
+              <option>Anchor (5,000 FML)</option>
+            </select>
+          </div>
+          <div class="modal-field"><label class="modal-label">Approx. claim volume</label>
+            <select class="modal-input modal-select">
+              <option>&lt; 1,000 / year</option>
+              <option>1k – 10k</option>
+              <option>10k – 100k</option>
+              <option>&gt; 100k</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="modal-submit">Submit application →</button>
+          <button type="button" class="modal-cancel" onclick="closeModal('apply-modal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div class="modal-success" id="apply-success">
+      <i class="ti ti-circle-check"></i>
+      <h4>Application received!</h4>
+      <p>We'll review your application and reach out to <strong id="apply-email-echo"></strong> within 2 business days.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Sign-in modal -->
+<div class="modal-backdrop" id="signin-modal" onclick="closeModalOnBackdrop(event,'signin-modal')">
+  <div class="modal signin-modal" role="dialog" aria-modal="true" aria-labelledby="signin-title">
+    <button class="modal-close" onclick="closeModal('signin-modal')" aria-label="Close"><i class="ti ti-x"></i></button>
+    <h3 id="signin-title">Sign in to FIFN</h3>
+    <p class="modal-sub">Access your node dashboard and federation controls.</p>
+    <form class="modal-form" onsubmit="submitSignin(event)">
+      <div class="modal-field"><label class="modal-label">Email</label><input class="modal-input" type="email" placeholder="you@insurer.com" required /></div>
+      <div class="modal-field"><label class="modal-label">Password</label><input class="modal-input" type="password" placeholder="••••••••" required /></div>
+      <div class="modal-actions">
+        <button type="submit" class="modal-submit">Sign in →</button>
+        <button type="button" class="modal-cancel" onclick="closeModal('signin-modal')">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#how-it-works" onclick="closeMobileNav()">How it works</a>
+  <a href="#benefits" onclick="closeMobileNav()">Benefits</a>
+  <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+  <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+  <div class="mobile-nav-actions">
+    <button class="btn-ghost" style="width:100%;text-align:center" onclick="closeMobileNav();openModal('signin-modal')">Sign in</button>
+    <button class="btn-purple" style="width:100%;text-align:center;padding:12px" onclick="closeMobileNav();openModal('apply-modal')">Join the network</button>
+  </div>
+</div>
+
 <!-- Nav -->
-<nav>
+<nav id="main-nav">
   <div class="nav-inner">
     <div class="nav-logo">
       <img src="assets/logo.svg" alt="FIFN" style="height:32px;width:auto;border-radius:6px;" />
@@ -194,9 +317,12 @@
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
-      <button class="btn-ghost">Sign in</button>
-      <button class="btn-purple">Join the network</button>
+      <button class="btn-ghost" onclick="openModal('signin-modal')">Sign in</button>
+      <button class="btn-purple" onclick="openModal('apply-modal')">Join the network</button>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Open menu" aria-expanded="false">
+      <i class="ti ti-menu-2" id="hamburger-icon"></i>
+    </button>
   </div>
 </nav>
 
@@ -206,14 +332,14 @@
   <h1>Fight fraud together.<br><em>Share nothing private.</em></h1>
   <p class="hero-sub">FIFN lets competing insurers collaboratively train a best-in-class fraud detection model — without ever exposing a single customer record.</p>
   <div class="hero-actions">
-    <button class="btn-hero btn-hero-primary">Apply to join &rarr;</button>
-    <button class="btn-hero btn-hero-outline"><i class="ti ti-player-play" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i> See how it works</button>
+    <button class="btn-hero btn-hero-primary" onclick="openModal('apply-modal')">Apply to join &rarr;</button>
+    <button class="btn-hero btn-hero-outline" onclick="scrollTo('how-it-works')"><i class="ti ti-player-play" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i> See how it works</button>
   </div>
   <div class="hero-stat-row">
-    <div class="hero-stat"><div class="hero-stat-value">7</div><div class="hero-stat-label">insurers in the network</div></div>
-    <div class="hero-stat"><div class="hero-stat-value">0.923</div><div class="hero-stat-label">global AUC-ROC</div></div>
-    <div class="hero-stat"><div class="hero-stat-value">3.4%</div><div class="hero-stat-label">avg AUC lift over local-only</div></div>
-    <div class="hero-stat"><div class="hero-stat-value">0</div><div class="hero-stat-label">raw records ever shared</div></div>
+    <div class="hero-stat"><div class="hero-stat-value" data-count="7" data-suffix="">0</div><div class="hero-stat-label">insurers in the network</div></div>
+    <div class="hero-stat"><div class="hero-stat-value" data-count="923" data-prefix="0." data-display="0.923">0.800</div><div class="hero-stat-label">global AUC-ROC</div></div>
+    <div class="hero-stat"><div class="hero-stat-value" data-display="3.4%">3.4%</div><div class="hero-stat-label">avg AUC lift over local-only</div></div>
+    <div class="hero-stat"><div class="hero-stat-value" data-count="0" data-suffix="">0</div><div class="hero-stat-label">raw records ever shared</div></div>
   </div>
 </div>
 
@@ -227,25 +353,25 @@
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
-      <div class="step-icon"><i class="ti ti-download" aria-hidden="true"></i></div>
+      <div class="step-icon"><i class="ti ti-download"></i></div>
       <div class="step-title">Pull global model</div>
       <div class="step-desc">At the start of each round your node fetches the latest aggregated model from Flock.io's on-chain registry via IPFS.</div>
     </div>
     <div class="step">
       <div class="step-num">02</div>
-      <div class="step-icon"><i class="ti ti-cpu" aria-hidden="true"></i></div>
+      <div class="step-icon"><i class="ti ti-cpu"></i></div>
       <div class="step-title">Train locally</div>
       <div class="step-desc">Fine-tune the model on your own claims data — on your own servers. Raw data never leaves your environment.</div>
     </div>
     <div class="step">
       <div class="step-num">03</div>
-      <div class="step-icon"><i class="ti ti-lock" aria-hidden="true"></i></div>
+      <div class="step-icon"><i class="ti ti-lock"></i></div>
       <div class="step-title">Submit encrypted weights</div>
-      <div class="step-desc">Your weight update is encrypted, uploaded to IPFS, and registered on-chain. No other party — not even FIFN — can decrypt it individually.</div>
+      <div class="step-desc">Your weight update is encrypted, uploaded to IPFS, and registered on-chain. No other party can decrypt it individually.</div>
     </div>
     <div class="step">
       <div class="step-num">04</div>
-      <div class="step-icon"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+      <div class="step-icon"><i class="ti ti-chart-line"></i></div>
       <div class="step-title">Get a better model</div>
       <div class="step-desc">Flock.io's on-chain aggregator combines all updates into a stronger global model. Every node — big or small — benefits equally.</div>
     </div>
@@ -259,31 +385,31 @@
   <div class="section-tag">Architecture</div>
   <h2>Built on Flock.io's secure aggregation</h2>
   <p class="section-sub">Secure multi-party aggregation means no single party sees another node's weights — only the averaged result is ever decrypted.</p>
-  <div class="arch">
+  <div class="arch" id="arch-diagram">
     <div class="arch-grid">
-      <div class="arch-nodes">
-        <div class="arch-node"><i class="ti ti-building-bank" aria-hidden="true"></i> Insurer A · 12k claims</div>
-        <div class="arch-node"><i class="ti ti-building-bank" aria-hidden="true"></i> Insurer B · 4k claims</div>
-        <div class="arch-node"><i class="ti ti-building-bank" aria-hidden="true"></i> Insurer C · 900 claims</div>
-        <div class="arch-node"><i class="ti ti-building-bank" aria-hidden="true"></i> Insurer D–G · …</div>
+      <div class="arch-nodes" id="arch-nodes">
+        <div class="arch-node" id="anode-0"><i class="ti ti-building-bank"></i> Insurer A · 12k claims</div>
+        <div class="arch-node" id="anode-1"><i class="ti ti-building-bank"></i> Insurer B · 4k claims</div>
+        <div class="arch-node" id="anode-2"><i class="ti ti-building-bank"></i> Insurer C · 900 claims</div>
+        <div class="arch-node" id="anode-3"><i class="ti ti-building-bank"></i> Insurer D–G · …</div>
       </div>
       <div class="arch-arrow">
         <div class="arch-arrow-line"></div>
         <div class="arch-arrow-label">encrypted ΔW</div>
       </div>
       <div class="arch-center">
-        <div class="arch-center-icon"><i class="ti ti-topology-star-3" aria-hidden="true"></i></div>
+        <div class="arch-center-icon"><i class="ti ti-topology-star-3"></i></div>
         <h4>Flock.io on-chain aggregator</h4>
         <p>Threshold secret-sharing<br>Weighted FedAvg · IPFS</p>
       </div>
-      <div class="arch-arrow" style="transform: scaleX(-1)">
+      <div class="arch-arrow" style="transform:scaleX(-1)">
         <div class="arch-arrow-line"></div>
-        <div class="arch-arrow-label" style="transform: scaleX(-1)">global model CID</div>
+        <div class="arch-arrow-label" style="transform:scaleX(-1)">global model CID</div>
       </div>
-      <div style="background:rgba(29,158,117,0.1);border:0.5px solid rgba(29,158,117,0.4);border-radius:var(--r-lg);padding:24px 28px;text-align:center;">
-        <div style="font-size:28px;color:var(--teal-light);margin-bottom:8px"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
-        <h4 style="font-size:14px;font-weight:600;color:var(--teal-light)">Global fraud model</h4>
-        <p style="font-size:11px;color:var(--text3);margin-top:4px">Shared by all nodes<br>AUC 0.923 · Round 14</p>
+      <div class="arch-out">
+        <i class="ti ti-shield-check"></i>
+        <h4>Global fraud model</h4>
+        <p>Shared by all nodes<br>AUC 0.923 · Round 14</p>
       </div>
     </div>
   </div>
@@ -298,32 +424,32 @@
   <p class="section-sub">A large insurer already has enough data. FIFN levels the playing field.</p>
   <div class="benefits">
     <div class="benefit">
-      <div class="benefit-icon bi-purple"><i class="ti ti-shield-lock" aria-hidden="true"></i></div>
+      <div class="benefit-icon bi-purple"><i class="ti ti-shield-lock"></i></div>
       <h3>Privacy by design</h3>
       <p>Raw claims data — policyholder names, addresses, medical records — never leaves your servers. Only encrypted model weight deltas are submitted, and only the aggregate is ever decrypted.</p>
     </div>
     <div class="benefit">
-      <div class="benefit-icon bi-teal"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
+      <div class="benefit-icon bi-teal"><i class="ti ti-chart-bar"></i></div>
       <h3>Enterprise-grade detection on a small-insurer budget</h3>
       <p>Members with as few as 800 labelled claims have seen AUC-ROC improvements of 4–6 percentage points — equivalent to years of in-house data collection.</p>
     </div>
     <div class="benefit">
-      <div class="benefit-icon bi-amber"><i class="ti ti-coin" aria-hidden="true"></i></div>
+      <div class="benefit-icon bi-amber"><i class="ti ti-coin"></i></div>
       <h3>Earn rewards for quality data</h3>
       <p>Flock.io's on-chain reward mechanism distributes FML tokens proportionally to how much your updates improve the global model. Good labels earn more.</p>
     </div>
     <div class="benefit">
-      <div class="benefit-icon bi-purple"><i class="ti ti-topology-ring-3" aria-hidden="true"></i></div>
+      <div class="benefit-icon bi-purple"><i class="ti ti-topology-ring-3"></i></div>
       <h3>Cross-insurer fraud rings detected</h3>
       <p>Staged accident rings, organised medical billing fraud, and serial policy fraud all span multiple insurers. A federated model catches what local models can't see.</p>
     </div>
     <div class="benefit">
-      <div class="benefit-icon bi-teal"><i class="ti ti-adjustments" aria-hidden="true"></i></div>
+      <div class="benefit-icon bi-teal"><i class="ti ti-adjustments"></i></div>
       <h3>Adapts to your fraud base rate</h3>
       <p>FedProx regularisation prevents the global model from being dominated by large nodes. Even a 0.5% fraud base rate is handled with per-node class-weight calibration.</p>
     </div>
     <div class="benefit">
-      <div class="benefit-icon bi-amber"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+      <div class="benefit-icon bi-amber"><i class="ti ti-certificate"></i></div>
       <h3>Fully auditable on-chain</h3>
       <p>Every federation round — who submitted, when, what the resulting model CID is — is immutably recorded. Regulators and auditors get a complete, tamper-proof log.</p>
     </div>
@@ -382,7 +508,7 @@
         <li class="muted"><i class="ti ti-x"></i> Earn FML rewards</li>
         <li class="muted"><i class="ti ti-x"></i> Priority aggregation</li>
       </ul>
-      <button class="plan-btn plan-btn-outline">Get started</button>
+      <button class="plan-btn plan-btn-outline" onclick="openApplyWithTier('Observer (Free)')">Get started</button>
     </div>
     <div class="plan plan-featured">
       <div class="plan-tag">Most popular</div>
@@ -397,7 +523,7 @@
         <li><i class="ti ti-check"></i> Up to 3 policy-type cohorts</li>
         <li class="muted"><i class="ti ti-x"></i> Priority aggregation slot</li>
       </ul>
-      <button class="plan-btn plan-btn-filled">Join as Participant</button>
+      <button class="plan-btn plan-btn-filled" onclick="openApplyWithTier('Participant (500 FML)')">Join as Participant</button>
     </div>
     <div class="plan">
       <div class="plan-name">Anchor</div>
@@ -411,7 +537,7 @@
         <li><i class="ti ti-check"></i> Dedicated SLA (99.9% uptime)</li>
         <li><i class="ti ti-check"></i> Governance voting rights</li>
       </ul>
-      <button class="plan-btn plan-btn-outline">Talk to us</button>
+      <button class="plan-btn plan-btn-outline" onclick="openApplyWithTier('Anchor (5,000 FML)')">Talk to us</button>
     </div>
   </div>
 </section>
@@ -423,29 +549,29 @@
   <div class="section-tag">FAQ</div>
   <h2>Common questions</h2>
   <p class="section-sub">Everything you need to know before joining.</p>
-  <div class="faq">
+  <div class="faq" id="faq-list">
     <div class="faq-item open">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does FIFN ever see our claims data? <i class="ti ti-plus"></i></div>
+      <div class="faq-q">Does FIFN ever see our claims data? <i class="ti ti-plus"></i></div>
       <div class="faq-a">No. Raw claims data never leaves your environment. Your node trains locally on your own servers and submits only encrypted model weight updates. Flock.io's threshold secret-sharing means the aggregator sees only the combined result — never any individual node's weights.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if my fraud labels are sparse or uncertain? <i class="ti ti-plus"></i></div>
+      <div class="faq-q">What if my fraud labels are sparse or uncertain? <i class="ti ti-plus"></i></div>
       <div class="faq-a">FIFN handles label heterogeneity. Each node calibrates its own class weights before training (tuned to your fraud base rate), and our FedProx regularisation prevents nodes with sparse or noisy labels from destabilising the global model. You can also pass a label-confidence score alongside your submission so the aggregator weights your update appropriately.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can a competitor learn anything from our participation? <i class="ti ti-plus"></i></div>
+      <div class="faq-q">Can a competitor learn anything from our participation? <i class="ti ti-plus"></i></div>
       <div class="faq-a">Cryptographically, no. Your weight delta is encrypted before it leaves your node, and the contract enforces a minimum of 5 participants per round before aggregation. Even if a competitor controls 4 of those other nodes, they cannot reconstruct your individual update from the aggregate. Differential privacy noise is added locally for additional protection.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What infrastructure do I need to run a node? <i class="ti ti-plus"></i></div>
+      <div class="faq-q">What infrastructure do I need to run a node? <i class="ti ti-plus"></i></div>
       <div class="faq-a">A Python 3.11+ environment with a GPU (optional but faster) and internet access. Our open-source client handles everything: model serialisation, encryption, IPFS upload, and on-chain submission. Most insurers run it on a single VM inside their existing cloud account. Typical round time is 35–50 minutes end-to-end.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How are FML rewards calculated? <i class="ti ti-plus"></i></div>
-      <div class="faq-a">Rewards are proportional to the improvement your update contributes to the global model's validation loss on a held-out benchmark set maintained by the Flock.io contract. Larger datasets and higher-quality labels tend to earn more. Updates that degrade the model (e.g., from corrupted data or bad labels) earn nothing and may trigger a stake slash if the degradation is significant.</div>
+      <div class="faq-q">How are FML rewards calculated? <i class="ti ti-plus"></i></div>
+      <div class="faq-a">Rewards are proportional to the improvement your update contributes to the global model's validation loss on a held-out benchmark set maintained by the Flock.io contract. Larger datasets and higher-quality labels tend to earn more. Updates that degrade the model earn nothing and may trigger a stake slash if the degradation is significant.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is there regulatory precedent for this kind of data sharing? <i class="ti ti-plus"></i></div>
+      <div class="faq-q">Is there regulatory precedent for this kind of data sharing? <i class="ti ti-plus"></i></div>
       <div class="faq-a">Yes. Because no raw data is exchanged, FIFN is architecturally equivalent to a traditional model-sharing arrangement, not a data-sharing arrangement. Several EU and US jurisdictions have published guidance that federated learning of this type does not constitute transfer of personal data under GDPR or CCPA. We recommend legal review for your specific jurisdiction, and can provide a privacy impact assessment template.</div>
     </div>
   </div>
@@ -460,8 +586,8 @@
     <h2>Ready to detect fraud you can't see alone?</h2>
     <p>Applications take 10 minutes. You can run your first federation round the same day.</p>
     <div class="cta-actions">
-      <button class="btn-hero btn-hero-primary">Apply to join &rarr;</button>
-      <button class="btn-hero btn-hero-outline">Read the docs</button>
+      <button class="btn-hero btn-hero-primary" onclick="openModal('apply-modal')">Apply to join &rarr;</button>
+      <a href="https://github.com/FranciscoPereira/FIFN#readme" target="_blank" rel="noopener"><button class="btn-hero btn-hero-outline">Read the docs</button></a>
     </div>
   </div>
 </section>
@@ -471,24 +597,29 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="nav-logo">
-        <div class="nav-icon"><i class="ti ti-topology-star-3" aria-hidden="true"></i></div>
+        <div class="nav-icon"><i class="ti ti-topology-star-3"></i></div>
         <span class="nav-brand">FIFN</span>
       </div>
       <p>Federated Insurance Fraud Network — collaborative fraud detection without compromising privacy.</p>
+      <div class="footer-social">
+        <a href="https://github.com/FranciscoPereira/FIFN" target="_blank" rel="noopener" aria-label="GitHub"><i class="ti ti-brand-github"></i></a>
+        <a href="#" aria-label="Twitter/X"><i class="ti ti-brand-x"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+      </div>
     </div>
     <div class="footer-col">
       <h4>Product</h4>
       <a href="#how-it-works">How it works</a>
       <a href="#benefits">Benefits</a>
       <a href="#pricing">Pricing</a>
-      <a href="#">Dashboard</a>
-      <a href="#">API docs</a>
+      <a href="../dashboard/">Dashboard</a>
+      <a href="https://github.com/FranciscoPereira/FIFN#readme" target="_blank" rel="noopener">API docs</a>
     </div>
     <div class="footer-col">
       <h4>Network</h4>
-      <a href="#">Join FIFN</a>
-      <a href="#">Node setup</a>
-      <a href="#">Flock.io</a>
+      <a href="#" onclick="openModal('apply-modal');return false">Join FIFN</a>
+      <a href="https://github.com/FranciscoPereira/FIFN#getting-started" target="_blank" rel="noopener">Node setup</a>
+      <a href="https://flock.io" target="_blank" rel="noopener">Flock.io</a>
       <a href="#">On-chain explorer</a>
       <a href="#">Governance</a>
     </div>
@@ -498,14 +629,155 @@
       <a href="#">Blog</a>
       <a href="#">Privacy policy</a>
       <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="mailto:hello@fifn.io">Contact</a>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 FIFN. Built on Flock.io.</span>
-    <span>MIT licensed · Open source</span>
+    <span>MIT licensed · <a href="https://github.com/FranciscoPereira/FIFN" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Open source</a></span>
   </div>
 </footer>
 
+<script>
+// ── Mobile nav ────────────────────────────────────────────────────────────────
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger');
+  const icon = document.getElementById('hamburger-icon');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  icon.className = open ? 'ti ti-x' : 'ti ti-menu-2';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-nav').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  document.getElementById('hamburger-icon').className = 'ti ti-menu-2';
+}
+
+// ── Smooth scroll helper ──────────────────────────────────────────────────────
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── Scroll spy (nav active links) ─────────────────────────────────────────────
+const sections = ['how-it-works','benefits','pricing','faq'];
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, {rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+// ── Hero counter animation ────────────────────────────────────────────────────
+function animateCounters() {
+  document.querySelectorAll('.hero-stat-value[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix !== undefined ? el.dataset.suffix : '';
+    const display = el.dataset.display;
+    if (display) { el.textContent = display; return; } // static display
+    const duration = 1200;
+    const start = performance.now();
+    const from = target === 0 ? 0 : 0;
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      const val = Math.round(from + (target - from) * ease);
+      el.textContent = prefix + val + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+// Handle "0.923" display specially
+document.querySelectorAll('.hero-stat-value[data-display]').forEach(el => {
+  // already set via data-display attribute
+});
+
+const heroObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { animateCounters(); heroObserver.disconnect(); }
+}, {threshold: 0.2});
+heroObserver.observe(document.querySelector('.hero-stat-row'));
+
+// ── FAQ accordion (exclusive open) ───────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+  q.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); q.click(); }
+  });
+  q.setAttribute('tabindex', '0');
+  q.setAttribute('role', 'button');
+});
+
+// ── Modal helpers ─────────────────────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOnBackdrop(e, id) {
+  if (e.target === document.getElementById(id)) closeModal(id);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    ['apply-modal','signin-modal'].forEach(id => closeModal(id));
+  }
+});
+
+// ── Apply modal ───────────────────────────────────────────────────────────────
+function openApplyWithTier(tier) {
+  openModal('apply-modal');
+  const sel = document.querySelector('#apply-modal select');
+  if (sel) {
+    for (const opt of sel.options) {
+      if (opt.text.startsWith(tier.split(' ')[0])) { opt.selected = true; break; }
+    }
+  }
+}
+function submitApply(e) {
+  e.preventDefault();
+  const email = e.target.querySelector('[type=email]').value;
+  document.getElementById('apply-email-echo').textContent = email;
+  document.getElementById('apply-form-content').style.display = 'none';
+  document.getElementById('apply-success').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('apply-success').style.display = 'none';
+    document.getElementById('apply-form-content').style.display = '';
+    e.target.reset();
+    closeModal('apply-modal');
+  }, 4000);
+}
+
+// ── Sign-in modal ─────────────────────────────────────────────────────────────
+function submitSignin(e) {
+  e.preventDefault();
+  closeModal('signin-modal');
+  window.location.href = '../dashboard/';
+}
+
+// ── Architecture node pulse animation ────────────────────────────────────────
+let archNode = 0;
+const archNodes = document.querySelectorAll('.arch-node');
+function pulseArchNode() {
+  archNodes.forEach(n => n.classList.remove('active-node'));
+  archNodes[archNode].classList.add('active-node');
+  archNode = (archNode + 1) % archNodes.length;
+}
+setInterval(pulseArchNode, 1200);
+pulseArchNode();
+</script>
 </body>
 </html>
