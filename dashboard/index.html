@@ -321,7 +321,7 @@
       <div class="node-badge">
         <div class="node-dot"></div>
         <div class="node-info">
-          <div class="node-id">insurer-a</div>
+          <div class="node-id">meridian-auto</div>
           <div class="node-status">Node active · staked 500 FML</div>
         </div>
       </div>
@@ -471,9 +471,9 @@
               <span class="card-action" onclick="navigate('rounds')">All rounds →</span>
             </div>
             <div class="timeline">
-              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#534AB7"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 14 <span style="font-size:10px;padding:2px 7px;background:var(--teal-bg);color:var(--teal-text);border-radius:10px;margin-left:4px">Active</span></div><div class="tl-detail">4/7 nodes submitted · awaiting insurer-c, e, g</div><div class="tl-time">Started 47 min ago</div></div></div>
+              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#534AB7"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 14 <span style="font-size:10px;padding:2px 7px;background:var(--teal-bg);color:var(--teal-text);border-radius:10px;margin-left:4px">Active</span></div><div class="tl-detail">4/7 nodes submitted · awaiting BluePeak, Lakeside, Summit</div><div class="tl-time">Started 47 min ago</div></div></div>
               <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 13 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.916 → 0.923 · tx 0x4a2f…c81d</div><div class="tl-time">2h 12m ago · duration 38 min</div></div></div>
-              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 12 — completed</div><div class="tl-detail">6/7 nodes · AUC 0.911 → 0.916 · insurer-g absent</div><div class="tl-time">5h ago · duration 42 min</div></div></div>
+              <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 12 — completed</div><div class="tl-detail">6/7 nodes · AUC 0.911 → 0.916 · Summit Life absent</div><div class="tl-time">5h ago · duration 42 min</div></div></div>
               <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#1D9E75"></div><div class="tl-connector"></div></div><div class="tl-content"><div class="tl-round">Round 11 — completed</div><div class="tl-detail">7/7 nodes · AUC 0.904 → 0.911 · FedProx switched on</div><div class="tl-time">8h ago · duration 35 min</div></div></div>
               <div class="tl-item"><div class="tl-line"><div class="tl-dot" style="background:#888780"></div></div><div class="tl-content"><div class="tl-round">Round 10 — completed</div><div class="tl-detail">5/7 nodes · AUC 0.895 → 0.904</div><div class="tl-time">11h ago · duration 51 min</div></div></div>
             </div>
@@ -630,7 +630,7 @@
           <p>FML token earnings from federation participation, distributed proportional to model improvement contribution.</p>
         </div>
         <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
-          <div class="metric"><div class="metric-label"><i class="ti ti-coin"></i> Total FML earned</div><div class="metric-value">1,842</div><div class="metric-delta delta-up">insurer-a · all rounds</div></div>
+          <div class="metric"><div class="metric-label"><i class="ti ti-coin"></i> Total FML earned</div><div class="metric-value">1,842</div><div class="metric-delta delta-up">meridian-auto · all rounds</div></div>
           <div class="metric"><div class="metric-label"><i class="ti ti-trending-up"></i> This round est.</div><div class="metric-value">~148</div><div class="metric-delta delta-up">Based on model improvement</div></div>
           <div class="metric"><div class="metric-label"><i class="ti ti-lock"></i> Staked</div><div class="metric-value">500</div><div class="metric-delta">FML · Participant tier</div></div>
         </div>
@@ -696,13 +696,13 @@
       <div class="view" id="view-config">
         <div class="page-header">
           <h1>Node configuration</h1>
-          <p>Adjust training, privacy, and federation settings for insurer-a.</p>
+          <p>Adjust training, privacy, and federation settings for meridian-auto.</p>
         </div>
         <div class="row2" style="align-items:start">
           <div class="card">
             <div class="form-section">Node identity</div>
             <div class="form-grid">
-              <div class="form-group"><label class="form-label">Insurer ID</label><input class="input" value="insurer-a" /></div>
+              <div class="form-group"><label class="form-label">Insurer ID</label><input class="input" value="meridian-auto" /></div>
               <div class="form-group"><label class="form-label">Flock.io task ID</label><input class="input" value="task-0x9f2c…a14b" /></div>
               <div class="form-group full"><label class="form-label">Data path</label><input class="input" value="data/raw/claims.parquet" /><span class="form-hint">Path to your claims parquet file on this node.</span></div>
             </div>
@@ -742,7 +742,7 @@
               <div><div class="toggle-label">Fraud alerts webhook</div><div class="toggle-sub">POST to your endpoint when score ≥ threshold</div></div>
               <label class="toggle"><input type="checkbox" checked onchange="toast('Webhook setting updated.','success')"><span class="toggle-track"></span></label>
             </div>
-            <div class="form-group" style="margin-top:12px"><label class="form-label">Webhook URL</label><input class="input" value="https://ops.insurer-a.com/hooks/fifn" /></div>
+            <div class="form-group" style="margin-top:12px"><label class="form-label">Webhook URL</label><input class="input" value="https://ops.meridian-auto.com/hooks/fifn" /></div>
             <div class="form-group" style="margin-top:10px"><label class="form-label">Alert threshold</label><input class="input" type="number" step="0.05" value="0.7" /></div>
           </div>
         </div>
@@ -790,40 +790,40 @@ const ROUNDS = [
 ];
 
 const NODES_DATA = [
-  {id:'IA', name:'Insurer A', status:'submitted', samples:12840, auc:0.908, stake:500,  fml:1842, rounds:13, last:'2 min ago'},
-  {id:'IB', name:'Insurer B', status:'submitted', samples:4210,  auc:0.891, stake:500,  fml:924,  rounds:13, last:'5 min ago'},
-  {id:'IC', name:'Insurer C', status:'training',  samples:890,   auc:0.879, stake:500,  fml:412,  rounds:11, last:'11 min ago'},
-  {id:'ID', name:'Insurer D', status:'submitted', samples:6120,  auc:0.900, stake:500,  fml:1241, rounds:13, last:'3 min ago'},
-  {id:'IE', name:'Insurer E', status:'waiting',   samples:2310,  auc:0.871, stake:500,  fml:687,  rounds:12, last:'8 min ago'},
-  {id:'IF', name:'Insurer F', status:'submitted', samples:3780,  auc:0.886, stake:500,  fml:891,  rounds:13, last:'4 min ago'},
-  {id:'IG', name:'Insurer G', status:'offline',   samples:1450,  auc:null,  stake:500,  fml:334,  rounds:10, last:'31 min ago'},
+  {id:'MA', name:'Meridian Auto Group',       status:'submitted', samples:12840, auc:0.908, stake:500,  fml:1842, rounds:13, last:'2 min ago'},
+  {id:'CS', name:'Coastal Shield Insurance',  status:'submitted', samples:4210,  auc:0.891, stake:500,  fml:924,  rounds:13, last:'5 min ago'},
+  {id:'BP', name:'BluePeak Mutual',           status:'training',  samples:890,   auc:0.879, stake:500,  fml:412,  rounds:11, last:'11 min ago'},
+  {id:'HG', name:'Hartwell General',          status:'submitted', samples:6120,  auc:0.900, stake:500,  fml:1241, rounds:13, last:'3 min ago'},
+  {id:'LH', name:'Lakeside Health Plans',     status:'waiting',   samples:2310,  auc:0.871, stake:500,  fml:687,  rounds:12, last:'8 min ago'},
+  {id:'RP', name:'Redwood P&C',               status:'submitted', samples:3780,  auc:0.886, stake:500,  fml:891,  rounds:13, last:'4 min ago'},
+  {id:'SL', name:'Summit Life & Casualty',    status:'offline',   samples:1450,  auc:null,  stake:500,  fml:334,  rounds:10, last:'31 min ago'},
 ];
 
 const ALERTS_DATA = [
-  {id:1, sev:'high', icon:'ti-alert-circle', title:'High-confidence fraud cluster', desc:'8 claims from insurer-b share agent ID, filed within 3 hours. Score: 0.97', time:'2m ago', dismissed:false},
+  {id:1, sev:'high', icon:'ti-alert-circle', title:'High-confidence fraud cluster', desc:'8 claims from Coastal Shield share agent ID, filed within 3 hours. Score: 0.97', time:'2m ago', dismissed:false},
   {id:2, sev:'high', icon:'ti-alert-circle', title:'Staged accident pattern', desc:'CLM-29841 matches cross-insurer collision ring detected in round 11.', time:'14m ago', dismissed:false},
-  {id:3, sev:'med',  icon:'ti-exclamation-mark', title:'Node G went offline', desc:'insurer-g missed round 14 submission deadline. Stake at risk.', time:'31m ago', dismissed:false},
-  {id:4, sev:'med',  icon:'ti-exclamation-mark', title:'Label drift — insurer-c', desc:'Fraud base rate dropped from 4.2% → 1.8%. FedProx μ adjusted to 0.05.', time:'1h ago', dismissed:false},
+  {id:3, sev:'med',  icon:'ti-exclamation-mark', title:'Summit Life went offline', desc:'Summit Life &amp; Casualty missed round 14 submission deadline. Stake at risk.', time:'31m ago', dismissed:false},
+  {id:4, sev:'med',  icon:'ti-exclamation-mark', title:'Label drift — BluePeak Mutual', desc:'Fraud base rate dropped from 4.2% → 1.8%. FedProx μ adjusted to 0.05.', time:'1h ago', dismissed:false},
   {id:5, sev:'low',  icon:'ti-info-circle', title:'Round 13 aggregation complete', desc:'Global model updated. AUC improved +0.007. Rewards distributed.', time:'2h ago', dismissed:false},
   {id:6, sev:'med',  icon:'ti-exclamation-mark', title:'DP noise budget: 82% consumed', desc:'Cumulative ε=8.2. Consider increasing σ next round.', time:'3h ago', dismissed:false},
-  {id:7, sev:'low',  icon:'ti-info-circle', title:'New node: Insurer H applying', desc:'Application received from insurer-h. Staking review pending.', time:'5h ago', dismissed:false},
-  {id:8, sev:'high', icon:'ti-alert-circle', title:'Medical billing pattern — insurer-e', desc:'CLM-31024–31031 match known syndicate profile. Score avg: 0.93', time:'6h ago', dismissed:false},
+  {id:7, sev:'low',  icon:'ti-info-circle', title:'New node: Vantage Risk applying', desc:'Application received from Vantage Risk Solutions. Staking review pending.', time:'5h ago', dismissed:false},
+  {id:8, sev:'high', icon:'ti-alert-circle', title:'Medical billing pattern — Lakeside Health', desc:'CLM-31024–31031 match known syndicate profile. Score avg: 0.93', time:'6h ago', dismissed:false},
   {id:9, sev:'low',  icon:'ti-info-circle', title:'Round 12 rewards distributed', desc:'Total 6,240 FML distributed across 6 participating nodes.', time:'8h ago', dismissed:false},
 ];
 
 const CLAIMS_DATA = [
-  {id:'CLM-31031', ins:'insurer-e', type:'medical',   amount:'$142,800', score:0.97, filed:'Jun 18'},
-  {id:'CLM-29841', ins:'insurer-b', type:'collision',  amount:'$28,400',  score:0.95, filed:'Jun 19'},
-  {id:'CLM-31024', ins:'insurer-e', type:'medical',   amount:'$98,200',  score:0.94, filed:'Jun 18'},
-  {id:'CLM-30012', ins:'insurer-a', type:'fire',      amount:'$210,000', score:0.93, filed:'Jun 20'},
-  {id:'CLM-28991', ins:'insurer-b', type:'collision',  amount:'$34,100',  score:0.91, filed:'Jun 17'},
-  {id:'CLM-30441', ins:'insurer-d', type:'theft',     amount:'$19,800',  score:0.89, filed:'Jun 21'},
-  {id:'CLM-31108', ins:'insurer-a', type:'medical',   amount:'$67,500',  score:0.86, filed:'Jun 21'},
-  {id:'CLM-29002', ins:'insurer-c', type:'collision',  amount:'$12,300',  score:0.83, filed:'Jun 15'},
-  {id:'CLM-30887', ins:'insurer-f', type:'fire',      amount:'$88,900',  score:0.79, filed:'Jun 20'},
-  {id:'CLM-31200', ins:'insurer-d', type:'theft',     amount:'$9,400',   score:0.74, filed:'Jun 21'},
-  {id:'CLM-28742', ins:'insurer-b', type:'medical',   amount:'$54,200',  score:0.72, filed:'Jun 14'},
-  {id:'CLM-31349', ins:'insurer-a', type:'collision',  amount:'$16,700',  score:0.71, filed:'Jun 21'},
+  {id:'CLM-31031', ins:'Lakeside Health', type:'medical',   amount:'$142,800', score:0.97, filed:'Jun 18'},
+  {id:'CLM-29841', ins:'Coastal Shield', type:'collision',  amount:'$28,400',  score:0.95, filed:'Jun 19'},
+  {id:'CLM-31024', ins:'Lakeside Health', type:'medical',   amount:'$98,200',  score:0.94, filed:'Jun 18'},
+  {id:'CLM-30012', ins:'Meridian Auto', type:'fire',      amount:'$210,000', score:0.93, filed:'Jun 20'},
+  {id:'CLM-28991', ins:'Coastal Shield', type:'collision',  amount:'$34,100',  score:0.91, filed:'Jun 17'},
+  {id:'CLM-30441', ins:'Hartwell General', type:'theft',     amount:'$19,800',  score:0.89, filed:'Jun 21'},
+  {id:'CLM-31108', ins:'Meridian Auto', type:'medical',   amount:'$67,500',  score:0.86, filed:'Jun 21'},
+  {id:'CLM-29002', ins:'BluePeak Mutual', type:'collision',  amount:'$12,300',  score:0.83, filed:'Jun 15'},
+  {id:'CLM-30887', ins:'Redwood P&amp;C', type:'fire',      amount:'$88,900',  score:0.79, filed:'Jun 20'},
+  {id:'CLM-31200', ins:'Hartwell General', type:'theft',     amount:'$9,400',   score:0.74, filed:'Jun 21'},
+  {id:'CLM-28742', ins:'Coastal Shield', type:'medical',   amount:'$54,200',  score:0.72, filed:'Jun 14'},
+  {id:'CLM-31349', ins:'Meridian Auto', type:'collision',  amount:'$16,700',  score:0.71, filed:'Jun 21'},
 ];
 
 // ── Navigation ────────────────────────────────────────────────────────────────
@@ -1077,7 +1077,7 @@ function initViewCharts(view) {
       {label:'Local baseline avg', data:AUC_LOCAL, borderColor:'#1D9E75', borderDash:[4,3], borderWidth:1.5, pointRadius:0, fill:false, tension:0.3},
     ]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{grid:{color:grid},ticks:{maxRotation:0}}, y:{grid:{color:grid},min:0.78,max:0.94,ticks:{callback:v=>v.toFixed(2)}}}}});
 
-    mkChart('nodeChart', {type:'bar', data:{labels:['Insurer A','Insurer B','Insurer C','Insurer D','Insurer E','Insurer F'],
+    mkChart('nodeChart', {type:'bar', data:{labels:['Meridian Auto','Coastal Shield','BluePeak Mutual','Hartwell General','Lakeside Health','Redwood P&C'],
       datasets:[
         {label:'Local AUC', data:[0.908,0.891,0.879,0.900,0.871,0.886], backgroundColor:'#AFA9EC', borderRadius:3},
         {label:'Global model', data:[0.923,0.923,0.923,0.923,0.923,0.923], backgroundColor:'rgba(0,0,0,0)', borderColor:'#534AB7', borderWidth:1.5, borderDash:[4,3], type:'line', pointRadius:0, fill:false},
